@@ -1,0 +1,29 @@
+name : Build and Deploy
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node 22
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+      - name: 📦 Instalar dependencias
+        run: npm install
+
+      - name: 🏗️ Construir el proyecto
+        run: npm run build -- --base-href "./"
+
+      - name: 📂 Copiar .htaccess a la carpeta de build
+        run: cp .htaccess dist/teslo_front/browser/.htaccess
+
+      - name: 🚀 Desplegar en GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: teslo_preview
+          folder: dist/teslo_front/browser
