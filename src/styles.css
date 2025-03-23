@@ -1,3 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
 @import "tailwindcss-primeui";
+@custom-variant dark (&:where(.dark, .dark *));
+
+.bg-color{
+  @apply
+  dark:bg-slate-800
+  dark:text-stone-200
+
+  bg-slate-200
+  text-stone-800
+
+  duration-300
+}
+
+.bg-color-container{
+  @apply
+  bg-slate-100
+  dark:bg-slate-900
+
+  duration-300
+}
+
+.input-behavior{
+  @apply
+  outline-2 hover:outline-stone-500 outline-stone-800 dark:outline-stone-100 text-stone-800 dark:text-stone-100 rounded-xl w-full p-3
+}
