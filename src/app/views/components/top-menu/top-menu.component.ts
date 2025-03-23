@@ -19,10 +19,9 @@ export class TopMenuComponent {
 
   checked: boolean = false;
 
-  @Output() checkedChange = new EventEmitter<boolean>(); // Usamos EventEmitter para emitir el cambio
-
-  toggleTheme() {
-    this.checkedChange.emit(this.checked);
+  toggleDarkMode() {
+    const element = document.querySelector('html')!;
+    element.classList.toggle('dark');
   }
 
 }
