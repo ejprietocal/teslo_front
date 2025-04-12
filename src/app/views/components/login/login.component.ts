@@ -9,7 +9,7 @@ import { User } from '../../../interfaces/user';
 
 
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { LoginService } from '../../services/login.service';
 
 
 
@@ -24,7 +24,7 @@ import { MessageService } from 'primeng/api';
     ReactiveFormsModule,
     ToastModule,
   ],
-  providers: [MessageService],
+
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -38,8 +38,7 @@ export class LoginComponent {
   fb = inject(FormBuilder);
 
   constructor(
-    private http : HttpClient,
-    private toast: MessageService,
+    private readonly loginService: LoginService,
   ) { }
 
   form: FormGroup = this.fb.group({
@@ -49,23 +48,9 @@ export class LoginComponent {
 
   onSubmit(): void {
     if (this.form.valid) {
-      this.http.post<User>('http://localhost:3000/api/auth/login', this.form.value).subscribe({
-        next: (res) => {
-          // Cuando el login es exitoso, actualizamos la señal
-          this.datosUser.set(res);
-          this.showToast( 'success', 'Login exitoso', 'Has iniciado sesión correctamente', 1000);
-        },
-        error: (err) => {
-          console.error('Error en la solicitud de login:', err);
-          // Maneja el error aquí si es necesario
-          this.showToast('error', 'Error', 'Error Email o contraseña inválidos', 1000);
-        }
-      });
+      this.loginService.login(this.form);
     }
   }
 
-  showToast(severity :string ,summary:string, message: string, life: number) {
-    this.toast.add({ severity: severity, summary: summary, detail: message, life: life });
-  }
 
 }
