@@ -10,6 +10,7 @@ import { User } from '../../../interfaces/user';
 
 import { ToastModule } from 'primeng/toast';
 import { LoginService } from '../../services/login.service';
+import { MessageService } from 'primeng/api';
 
 
 
@@ -23,8 +24,8 @@ import { LoginService } from '../../services/login.service';
     FormsModule,
     ReactiveFormsModule,
     ToastModule,
-  ],
 
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

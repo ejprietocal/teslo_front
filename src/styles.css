@@ -16,6 +16,10 @@
   duration-300
 }
 
+.bg-color-side{
+  @apply bg-slate-200 dark:bg-slate-600 duration-300
+}
+
 .bg-color-container{
   @apply
   bg-slate-100
