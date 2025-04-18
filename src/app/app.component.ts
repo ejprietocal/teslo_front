@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     RouterOutlet,
-    TopMenuComponent
+    TopMenuComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

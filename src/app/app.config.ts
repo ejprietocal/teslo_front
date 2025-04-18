@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { routes } from './app.routes';
@@ -7,6 +7,8 @@ import Aura from '@primeng/themes/aura';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
+// import { provideFontAwesome } from '@fortawesome/angular-fontawesome';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
