@@ -4,11 +4,6 @@ import { Injectable, signal } from '@angular/core';
   providedIn: 'root'
 })
 export class ToggleMenuService {
-
-  // readonly sidebarHidden = signal(true);
-
-  // readonly visible = signal(false);
-
   visible = signal(false);
 
   open() {

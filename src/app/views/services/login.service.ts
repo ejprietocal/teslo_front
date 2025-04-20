@@ -20,7 +20,7 @@ export class LoginService {
   public datosUser = signal<User | null>(null);
 
   login(form: FormGroup) : void {
-    this.http.post<any>('http://localhost:3000/api/auth/login', form.value).subscribe({
+    this.http.post<any>('https://tesloback-production.up.railway.app/api/auth/login', form.value).subscribe({
       next: (res) => {
         // Cuando el login es exitoso, actualizamos la señal
         this.datosUser.set(res);

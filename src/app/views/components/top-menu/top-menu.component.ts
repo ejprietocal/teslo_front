@@ -1,38 +1,25 @@
-import { Component, EventEmitter, inject, Output, signal, Signal, ViewChild } from '@angular/core';
-
-import { ToggleSwitchModule } from 'primeng/toggleswitch';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';  // Importa FormsModule
-import { ButtonModule } from 'primeng/button';
+import { Component, inject } from '@angular/core';
 import { ToggleMenuService } from '../../services/toggle-menu.service';
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faSun, faMoon, faGrip } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DarkModeService } from '../../services/dark-mode.service';
 
 
 @Component({
   selector: 'app-top-menu',
   imports: [
-    CommonModule,
-    ToggleSwitchModule,
-    FormsModule,
-    ButtonModule,
     FontAwesomeModule,
-
   ],
   templateUrl: './top-menu.component.html',
   styleUrl: './top-menu.component.css'
 })
 export class TopMenuComponent {
 
-  faBars = faBars;
-
   public readonly drawerService = inject(ToggleMenuService);
-  checked: boolean = false;
+  public readonly darkModeService = inject(DarkModeService);
 
-
-  toggleDarkMode() {
-    const element = document.querySelector('html')!;
-    element.classList.toggle('dark');
-  }
-
+  faBars = faBars;
+  faSun = faSun;
+  faMoon = faMoon;
+  faGrip = faGrip;
 }
