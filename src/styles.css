@@ -15,7 +15,9 @@
 
   duration-300
 }
-
+.bg-color-general{
+  @apply bg-gradient-to-tr from-green-300 to-purple-600
+}
 .bg-color-side {
   @apply bg-green-200 dark:bg-green-900 duration-300;
 }

@@ -4,14 +4,11 @@ import { PasswordModule } from 'primeng/password';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { User } from '../../../interfaces/user';
-
+import { Router } from '@angular/router';
 
 import { ToastModule } from 'primeng/toast';
 import { LoginService } from '../../services/login.service';
-import { MessageService } from 'primeng/api';
-
 
 
 @Component({
@@ -40,6 +37,7 @@ export class LoginComponent {
 
   constructor(
     private readonly loginService: LoginService,
+    private readonly router: Router
   ) { }
 
   form: FormGroup = this.fb.group({
@@ -53,5 +51,7 @@ export class LoginComponent {
     }
   }
 
-
+  registration(): void {
+    this.router.navigate(['/register']);
+  }
 }

@@ -13,6 +13,10 @@ export const routes: Routes = [
     canActivate:[protectRouteGuard],
   },
   {
+    path: 'register',
+    loadComponent: () => import('./views/components/register/register.component').then(m => m.RegisterComponent),
+  },
+  {
     path: '**',
     loadComponent: () => import('./views/components/not-found/not-found.component').then(m => m.NotFoundComponent)
   },
