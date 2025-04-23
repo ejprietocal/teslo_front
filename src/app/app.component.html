@@ -1,5 +1,6 @@
 <div>
   <!-- <app-top-menu></app-top-menu> -->
+  <app-loader *ngIf="loaderService.loader()"></app-loader>
   <router-outlet />
 </div>
 

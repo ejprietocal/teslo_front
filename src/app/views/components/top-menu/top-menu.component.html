@@ -12,6 +12,9 @@
       <button  class="cursor-pointer" (click)="darkModeService.toggleDarkMode()">
         <fa-icon [icon]="darkModeService.darkMode() ? faSun : faMoon"></fa-icon>
       </button>
+      <button class="cursor-pointer" (click)="logout()">
+        <fa-icon [icon]="faRightFromBracket"></fa-icon>
+      </button>
     </li>
   </ul>
 </nav>

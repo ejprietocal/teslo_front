@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 
 import { ToastModule } from 'primeng/toast';
 import { LoginService } from '../../services/login.service';
+import { ActivateLoaderService } from '../../../services/activate-loader.service';
 
 
 @Component({
