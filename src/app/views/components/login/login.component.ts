@@ -6,10 +6,12 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from '../../../interfaces/user';
 import { Router } from '@angular/router';
+import { faBars, faSun, faMoon, faGrip, faRightFromBracket} from '@fortawesome/free-solid-svg-icons'
 
 import { ToastModule } from 'primeng/toast';
 import { LoginService } from '../../services/login.service';
-import { ActivateLoaderService } from '../../../services/activate-loader.service';
+import { DarkModeService } from '../../services/dark-mode.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @Component({
@@ -22,6 +24,7 @@ import { ActivateLoaderService } from '../../../services/activate-loader.service
     FormsModule,
     ReactiveFormsModule,
     ToastModule,
+    FontAwesomeModule
 
   ],
   templateUrl: './login.component.html',
@@ -32,13 +35,19 @@ export class LoginComponent {
   value: string = '';
   password: string = '';
 
+  faBars = faBars;
+  faSun = faSun;
+  faMoon = faMoon;
+  faGrip = faGrip;
+
   public datosUser = signal<User | null>(null);
 
   fb = inject(FormBuilder);
 
   constructor(
     private readonly loginService: LoginService,
-    private readonly router: Router
+    private readonly router: Router,
+    public readonly darkModeService : DarkModeService,
   ) { }
 
   form: FormGroup = this.fb.group({

@@ -17,8 +17,7 @@ export class LoginService {
     private router : Router,
     private messageService: MessageService,
     private readonly activateLoader : ActivateLoaderService,
-  ) {
-   }
+  ) {}
 
   public datosUser = signal<User | null>(null);
 
