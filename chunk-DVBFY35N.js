@@ -1,1 +1,0 @@
-import{M as a,ka as e}from"./chunk-WEBESGF7.js";var o=class t{loader=e(!1);activateSignal(){this.loader.set(!0)}deactivateSignal(){this.loader.set(!1)}static \u0275fac=function(i){return new(i||t)};static \u0275prov=a({token:t,factory:t.\u0275fac,providedIn:"root"})};export{o as a};
