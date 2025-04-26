@@ -5,18 +5,84 @@
     <div class="bg-color hidden lg:block">
       <img src="assets/images/registerimage.png" alt="logo" class="w-full h-full hidden lg:block">
     </div>
-    <div class="p-10 bg-color">
+    <div class="p-10 bg-color overflow-auto" >
       <h1 class="text-2xl font-bold bg-color">Registro</h1>
 
-      <form action="" class="mt-4">
-        <fieldset class="border-1 p-4 rounded-md">
+      <form action="" class="mt-4 " [formGroup]="form" (ngSubmit)="registrarData()">
+        <fieldset class="border-1 p-4 rounded-md mb-6">
           <legend class="text-lg font-semibold px-2">Datos Personales</legend>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-1 mt-2 mb-2">
-            <input type="text" class="input-behavior" placeholder="Nombres">
-            <input type="text" class="input-behavior" placeholder="Apellidos">
+              <input type="text" id="nombre" name="nombre" formControlName="nombre" placeholder="Nombres" class="input-behavior" required   >
+              <input type="text"
+              id="apellidos"
+              name="apellidos"
+              formControlName="apellidos"
+              placeholder="Apellidos"
+              class="input-behavior"
+              required  >
+
           </div>
-          <input type="number" class="input-behavior" placeholder="Telefono">
+          <input type="text"
+          id="cedula"
+          name="cedula"
+          formControlName="cedula"
+          placeholder="Cedula"
+          required  class="input-behavior mb-2">
+          <input type="text"
+          id="telefono"
+          name="telefono"
+          formControlName="telefono"
+          required  class="input-behavior  mb-2" placeholder="Telefono">
+
+          <input type="email"
+          id="email"
+          name="email"
+          formControlName="email"
+          placeholder="Escribe tu email"
+          class="input-behavior mb-2"
+          required>
+          @if(form.get('email')?.hasError('required') && form.get('email')?.touched){
+            <p class="text-red-500 text-xs">Este campo es requerido</p>
+          }
+          @if(form.get('email')?.hasError('email')){
+              <p class="text-red-500 text-xs">El formato de correo es invalido</p>
+          }
+
+          <input type="text"
+          id="ciudad"
+          name="ciudad"
+          formControlName="ciudad"
+          placeholder="Ciudad"
+          required  class="input-behavior mb-2">
+
+          <input type="password"
+          id="password"
+          name="password"
+          formControlName="password"
+          placeholder="password"
+          required  class="input-behavior mb-2">
+
+          <input type="text"
+          id="confermar_password"
+          name="confermar_password"
+          formControlName="confermar_password"
+          placeholder="Confirmar password"
+          required  class="input-behavior mb-2">
         </fieldset>
+        <div class="items-center">
+          <button class="button-behavior " type="submit">Guardar</button>
+        </div>
+
+        <!-- <fieldset class="border-1 p-4 rounded-md mb-2">
+          <legend class="text-lg font-semibold px-2">Datos de Compra</legend>
+          <label for="facturacion">Productos</label>
+          <select name="" id="facturacion" class="input-behavior mb-2" placeholder="Seleccionar Producto">
+            <option value="">Facturación</option>
+            <option value="">Restaurante</option>
+            <option value="">Ferreterias</option>
+            <option value="">Farmacias</option>
+          </select>
+        </fieldset> -->
       </form>
 
     </div>
