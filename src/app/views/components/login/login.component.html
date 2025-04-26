@@ -1,11 +1,19 @@
-<div class="p-4 sm:pt-0 flex  items-center justify-center w-full h-screen bg-color-general">
+<div class="md:p-4 sm:pt-0 flex  items-center justify-center w-full md:h-screen bg-color-general">
   <button  class="cursor-pointer absolute top-2 right-2" (click)="darkModeService.toggleDarkMode()">
     <fa-icon [icon]="darkModeService.darkMode() ? faSun : faMoon"></fa-icon>
   </button>
-  <div class="w-full max-w-6xl grid md:grid-cols-2 items-center justify-center h-fit bg-color rounded-2xl shadow-xl">
-    <div class="hidden md:block"></div>
-    <form class="rounded-2xl sm:pb-10 w-full" [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class="m-5">
+  <div class="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 items-center justify-center md:h-[70vh] overflow-hidden bg-color md:rounded-2xl shadow-xl">
+    <div class="bg-color bg-color-custom absolute items-center justify-center text-center top-0 left-0 h-[15rem] w-full md:relative flex md:w-full rounded-b-[5rem] md:rounded-bl-none md:h-full md:rounded-r-[15rem]">
+      <div class="flex flex-col items-center gap-5">
+        <h2 class="font-bold text-4xl">Bienvenido!</h2>
+        <p class="text-xl">Inicia sesión para continuar</p>
+
+        <button class="button-behavior" (click)="registration()">¿No tienes cuenta?</button>
+      </div>
+    </div>
+    <form class="rounded-2xl pt-[15rem] md:pt-0 p-7 md:pb-10 w-full" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <h3 class="font-bold text-center uppercase p-5 text-2xl">Ingreso</h3>
+        <div class="pt-5 pb-5">
            <label for="email" class="block mt-2 mb-3 text-xl">Correo</label>
            <input
               type="email"
@@ -22,7 +30,7 @@
                   <p class="text-red-500 text-xs">El formato de correo es invalido</p>
               }
         </div>
-        <div class="m-5">
+        <div class="pb-5">
            <label for="password" class="block mt-2 mb-3 text-xl">Contraseña</label>
            <input
               type="password"
@@ -36,29 +44,27 @@
                   <p class="text-red-500 text-xs">Este campo es requerido</p>
               }
         </div>
-        <div class="m-5 flex items-center justify-between">
+        <div class="flex items-center justify-between">
 
         </div>
-        <div class="m-5">
+        <div class="pt-5 pb-5">
            <button [disabled]="form.invalid" type="submit" class="bg-color-container hover:cursor-pointer text-stone-800 dark:text-stone-100 rounded-xl w-full p-3 text-xl">
               Entrar
            </button>
         </div>
-        <div class="p-5 flex justify-between items-center">
-          <button class="text-stone-800 cursor-pointer dark:text-stone-100 text-sm hover:text-blue-500" (click)="registration()">¿No tienes cuenta?</button>
+        <div class="flex justify-between items-center">
+          <button class="text-stone-800 cursor-pointer dark:text-stone-100 text-sm hover:text-blue-500">Recuperar cuenta</button>
           <button  class="text-stone-800 dark:text-stone-100 text-sm">Contactanos</button>
         </div>
-        <p class="m-5 mt-10 mx-auto text-center">
-          O tambien con
+        <p class="mt-5 mx-auto text-center">
+          ingresar con
         </p>
-        <div class="m-5 flex align-center justify-center gap-20">
+        <div class="p-5 flex align-center justify-center gap-1">
             <button class="button-behavior">
               <span class="pi pi-google"></span>
-              <span class="text-lg">Google</span>
             </button>
             <button class="button-behavior">
               <span class="pi pi-apple"></span>
-              <span class="text-lg">Apple</span>
             </button>
         </div>
         <p-toast />
