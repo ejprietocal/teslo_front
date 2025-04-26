@@ -3,7 +3,7 @@ import { Component, inject, Signal, signal } from '@angular/core';
 import { PasswordModule } from 'primeng/password';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Form, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from '../../../interfaces/user';
 import { Router } from '@angular/router';
 import { faBars, faSun, faMoon, faGrip, faRightFromBracket} from '@fortawesome/free-solid-svg-icons'
@@ -49,6 +49,7 @@ export class LoginComponent {
     private readonly router: Router,
     public readonly darkModeService : DarkModeService,
   ) { }
+
 
   form: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
