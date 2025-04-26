@@ -3,14 +3,14 @@ import { Injectable, signal } from '@angular/core';
 import { User } from '../../interfaces/user';
 import { Router } from '@angular/router';
 import { ActivateLoaderService } from '../../services/activate-loader.service';
-import { environment } from '../../../environments/environment';
+import { environment } from '@environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RefreshTokenService {
 
-  private readonly urlCheckToken = environment.URL_CHECK_TOKEN_CLOUD;
+  private readonly environments = environment;
 
   constructor(
     private http : HttpClient,
@@ -24,7 +24,7 @@ export class RefreshTokenService {
     this.activateLoader.activateSignal();
     const token = localStorage.getItem('auth_token');
     if (token) {
-      this.http.get<any>(this.urlCheckToken, {
+      this.http.get<any>(this.environments.URL_CHECK_TOKEN, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

@@ -5,7 +5,7 @@ import { User } from '../../interfaces/user';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ActivateLoaderService } from '../../services/activate-loader.service';
-import { environment } from '../../../environments/environment';
+import { environment } from '@environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ import { environment } from '../../../environments/environment';
 export class LoginService {
   toast: any;
 
-  private readonly urlLogin : string = environment.URL_LOGIN_CLOUD;
+  private readonly environments  = environment;
 
 
   constructor(
@@ -27,7 +27,7 @@ export class LoginService {
 
   login(form: FormGroup) : void {
     this.activateLoader.activateSignal();
-    this.http.post<any>(this.urlLogin, form.value).subscribe({
+    this.http.post<any>(this.environments.URL_LOGIN, form.value).subscribe({
       next: (res) => {
         this.datosUser.set(res);
         this.activateLoader.deactivateSignal();
