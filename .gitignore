@@ -8,7 +8,6 @@
 
 
 .env
-environments
 
 # Node
 /node_modules
