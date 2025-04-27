@@ -16,6 +16,7 @@ export class ToggleMenuService {
 
   toggle() {
     this.visible.update(v => !v);
+    console.log(this.visible())
   }
 
 }

@@ -5,12 +5,16 @@ import { User } from '../../interfaces/user';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ActivateLoaderService } from '../../services/activate-loader.service';
+import { environment } from '@environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
   toast: any;
+
+  private readonly environments  = environment;
+
 
   constructor(
     private http : HttpClient,
@@ -21,14 +25,12 @@ export class LoginService {
 
   public datosUser = signal<User | null>(null);
 
+
   login(form: FormGroup) : void {
     this.activateLoader.activateSignal();
-
-    this.http.post<any>('https://tesloback-production.up.railway.app/api/auth/login', form.value).subscribe({
+    this.http.post<any>(this.environments.URL_LOGIN, form.value).subscribe({
       next: (res) => {
-        // Cuando el login es exitoso, actualizamos la señal
         this.datosUser.set(res);
-        // this.showToast( 'success', 'Login exitoso', 'Has iniciado sesión correctamente', 1000);
         this.activateLoader.deactivateSignal();
         localStorage.setItem('auth_token', res.token!);
         this.router.navigate(['/dashboard']);
@@ -40,10 +42,12 @@ export class LoginService {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Email o contraseña inválidos',
+          detail: err.error.message,
           life: 2000
         });
       }
     });
   }
+
+
 }

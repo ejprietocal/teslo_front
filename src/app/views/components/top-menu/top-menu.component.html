@@ -1,8 +1,8 @@
-<nav class="h-12 p-2 w-full flex items-center  bg-color-general">
+<nav class="h-12 p-2 ps-4 pe-4 w-full flex items-center  bg-color">
   <ul class="flex justify-between items-center w-full text-xl">
     <li>
-      <button (click)="drawerService.open()" class="cursor-pointer">
-        <fa-icon [icon]="faBars"></fa-icon>
+      <button (click)="drawerService.toggle()" class="cursor-pointer">
+        <fa-icon [icon]="drawerService.visible() ? faXmark : faBars"></fa-icon>
       </button>
     </li>
     <li class="flex items-center gap-5">

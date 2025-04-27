@@ -3,6 +3,8 @@ import { SideBarComponent } from '../side-bar/side-bar.component';
 import { ContentComponent } from '../content/content.component';
 import { TopMenuComponent } from "../top-menu/top-menu.component";
 import { ToggleMenuService } from '../../services/toggle-menu.service';
+import { LoginService } from '../../services/login.service';
+import { RefreshTokenService } from '../../services/refresh-token.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,5 +18,12 @@ import { ToggleMenuService } from '../../services/toggle-menu.service';
 })
 export class DashboardComponent {
   private readonly toggleMenuService = inject(ToggleMenuService);
+  private readonly refreshToken = inject(RefreshTokenService);
+
+  constructor() { }
+
+  ngOnInit(): void {
+    this.refreshToken.checkToken();
+  }
 
 }
