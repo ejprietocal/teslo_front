@@ -16,6 +16,7 @@ export const environment = {
   URL_LOGIN: '${process.env['URL_LOGIN']}',
   URL_REGISTER : '${process.env['URL_REGISTER']}',
   URL_CHECK_TOKEN : '${process.env['URL_CHECK_TOKEN']}',
+  CLAVE_SITIO_WEB_RECAPTCHA: '${process.env['CLAVE_SITIO_WEB_RECAPTCHA']}',
 };
 `
 

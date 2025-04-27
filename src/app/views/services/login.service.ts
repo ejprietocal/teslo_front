@@ -25,6 +25,7 @@ export class LoginService {
 
   public datosUser = signal<User | null>(null);
 
+
   login(form: FormGroup) : void {
     this.activateLoader.activateSignal();
     this.http.post<any>(this.environments.URL_LOGIN, form.value).subscribe({
@@ -41,7 +42,7 @@ export class LoginService {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Email o contraseña inválidos',
+          detail: err.error.message,
           life: 2000
         });
       }

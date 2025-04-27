@@ -7,11 +7,13 @@ import Aura from '@primeng/themes/aura';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
-// import { provideFontAwesome } from '@fortawesome/angular-fontawesome';
+import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha-2';
+import { environment } from '@environments/environment';
 
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    importProvidersFrom(RecaptchaV3Module),
     MessageService,
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(
@@ -34,6 +36,7 @@ export const appConfig: ApplicationConfig = {
             darkModeSelector: '.dark'
           }
       }
-    })
-  ]
+    }),
+    { provide: RECAPTCHA_V3_SITE_KEY, useValue: environment.CLAVE_SITIO_WEB_RECAPTCHA}
+  ],
 };

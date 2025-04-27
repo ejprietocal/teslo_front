@@ -12,6 +12,7 @@ import { ToastModule } from 'primeng/toast';
 import { LoginService } from '../../services/login.service';
 import { DarkModeService } from '../../services/dark-mode.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ReCaptchaV3Service } from 'ng-recaptcha-2';
 
 
 @Component({
@@ -40,9 +41,12 @@ export class LoginComponent {
   faMoon = faMoon;
   faGrip = faGrip;
 
+
+
   public datosUser = signal<User | null>(null);
 
   fb = inject(FormBuilder);
+  recaptchaService = inject(ReCaptchaV3Service);
 
   constructor(
     private readonly loginService: LoginService,
@@ -51,15 +55,18 @@ export class LoginComponent {
   ) { }
 
 
+
   form: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]]
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    recaptchaToken: ['']
   });
 
-  onSubmit(): void {
-    if (this.form.valid) {
+  onSubmitLogin(): void{
+    this.recaptchaService.execute('submitLogin').subscribe((token) =>{
+      this.form.get('recaptchaToken')?.setValue(token);
       this.loginService.login(this.form);
-    }
+    })
   }
 
   registration(): void {
