@@ -1,10 +1,4 @@
-<div class="grid grid-cols-1 md:grid-cols-12 gap-2 h-[calc(100vh-48px)] p-2">
-  <!-- Bloque 1: ocupa toda la fila en móvil, y 4 columnas en pantallas medianas -->
-  <div class="bg-red-400 md:col-span-4 md:row-span-12">1</div>
-
-  <!-- Bloque 2: ocupa toda la fila en móvil, y 8 columnas en pantallas medianas -->
-  <div class="bg-blue-400 md:col-span-8 md:row-span-6">2</div>
-
-  <!-- Bloque 3: ocupa toda la fila en móvil, y 8 columnas a partir de la col 2 en pantallas medianas -->
-  <div class="bg-amber-950 md:col-span-8 md:col-start-5 md:row-span-6">3</div>
+<div class="w-screen flex h-[calc(100vh-48px)]">
+  <app-right-menu />
+  <app-content-internal class="w-full"/>
 </div>
