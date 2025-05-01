@@ -1,16 +1,21 @@
-<div class="h-screen pt-1 pb-1 transition-all " [ngClass]="{ 'pl-0 pr-0 md:pl-2 opacity-0 md:opacity-100': !drawerService.visible(), 'p-1 opacity-100': drawerService.visible() }">
-  <div class="duration-200 text-md absolute h-[99vh] overflow-x-hidden overflow-y-auto bg-color backdrop-blur-sm  rounded-xl" [ngClass]="{'md:relative! p-1 w-70' : drawerService.visible(), 'w-0 md:relative md:p-1 md:w-14' : !drawerService.visible()}">
-    <span class="flex items-center justify-between duration-200"  [ngClass]="{'justify-center': !drawerService.visible()}">
+<div class="h-screen pt-1 pb-1 transition-all overflow-hidden" [ngClass]="{ 'pl-0 pr-0 md:pl-2 opacity-0 md:opacity-100': !drawerService.visible(), 'p-1 opacity-100': drawerService.visible() }">
+  <div class="duration-200 text-md absolute h-full overflow-hidden bg-color backdrop-blur-sm  rounded-xl" [ngClass]="{'md:relative! p-1 w-70' : drawerService.visible(), 'w-0 md:relative md:p-1 md:w-16' : !drawerService.visible()}">
+    <span class="flex items-center mb-1 justify-between duration-200"  [ngClass]="{'justify-center': !drawerService.visible()}">
       <fa-icon class="p-1" [icon]="faWebAwesome" ></fa-icon>
       <fa-icon class="p-1.5 cursor-pointer" [icon]="faXmark" (click)="drawerService.close()" [ngClass]="{'md:hidden' : !drawerService.visible()}"></fa-icon>
     </span>
 
-    <div class="container-menu-right flex flex-col h-[calc(99vh-45px)] justify-between">
-      <div class="">
-
+    <div class="container-menu-right flex flex-col h-[calc(99vh-47px)] overflow-hidden bg-color justify-between">
+      <div class="scrollbar-class h-full   mb-1  rounded-xl p-5 overflow-y-auto">
+        <div class="h-70"></div>
+        <div class="h-70"></div>
+        <div class="h-70"></div>
+        <div class="h-70"></div>
+        <div class="h-70"></div>
+        <div class="h-70"></div>
+        <div class="h-70"></div>
+        <div class="h-70"></div>
       </div>
-
-
       <div class="w-full flex flex-col gap-1">
         <button pTooltip="Gestión de cuenta" class="flex md:hidden items-center p-1 bg-color-button-right-menu" (click)="logout()" [ngClass]="{'justify-center': !drawerService.visible()}">
           <fa-icon class="p-2"  [icon]="faUser"></fa-icon>

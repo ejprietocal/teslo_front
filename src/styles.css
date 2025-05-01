@@ -3,6 +3,14 @@
 @import "tailwindcss-primeui";
 @import "primeicons/primeicons.css";
 
+
+@plugin 'tailwind-scrollbar' {
+  nocompatible: true;
+  preferredStrategy: 'pseudoelements';
+}
+
+
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 
@@ -19,7 +27,14 @@
   transition-all
 
   duration-200
+
 }
+
+.scrollbar-class{
+  @apply
+  scrollbar-thin scrollbar-thumb-gray-400 scrollbar-thumb-rounded-full scrollbar-track-transparent scrollbar-track-rounded-full
+}
+
 .bg-color-custom{
   @apply
   dark:bg-gradient-to-br dark:from-slate-400 dark:to-gray-800
