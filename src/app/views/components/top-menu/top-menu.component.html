@@ -1,19 +1,19 @@
-<nav class="h-12 p-2 ps-4 pe-4 w-full flex items-center bg-color border-b-1">
-  <ul class="flex justify-between items-center w-full text-xl">
+<nav class="h-12 p-2 ps-4 pe-4 w-full flex items-center">
+  <ul class="flex justify-between items-center w-full text-md">
     <li>
-      <button (click)="drawerService.toggle()" class="cursor-pointer">
-        <fa-icon [icon]="drawerService.visible() ? faXmark : faBars"></fa-icon>
+      <button (click)="drawerService.toggle()"  class="cursor-pointer">
+        <fa-icon [icon]="faBars" [ngClass]="{'md:hidden' : drawerService.visible()}"></fa-icon>
       </button>
     </li>
-    <li class="flex items-center gap-5">
+    <li class="flex items-center gap-7">
       <button class="cursor-pointer" (click)="drawerService.toggleFloatMenu()">
         <fa-icon [icon]="faGrip"></fa-icon>
       </button>
       <button  class="cursor-pointer" (click)="darkModeService.toggleDarkMode()">
         <fa-icon [icon]="darkModeService.darkMode() ? faSun : faMoon"></fa-icon>
       </button>
-      <button class="cursor-pointer" (click)="logout()">
-        <fa-icon [icon]="faRightFromBracket"></fa-icon>
+      <button pTooltip="Gestión de cuenta"  class="cursor-pointer hidden md:block">
+        <fa-icon [icon]="faUser"></fa-icon>
       </button>
     </li>
   </ul>
@@ -21,7 +21,7 @@
 
 
 
-  <div #floating class="floating-menu bg-color" [ngClass]="{'fadein': drawerService.floatMenuVisibility()}">
+  <div #floating class="floating-menu dark:bg-slate-900/30 bg-slate-200/40 backdrop-blur-2xl z-50" [ngClass]="{'fadein': drawerService.floatMenuVisibility()}">
 
   </div>
 

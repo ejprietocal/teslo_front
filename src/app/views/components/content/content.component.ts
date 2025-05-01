@@ -2,12 +2,13 @@ import { Component, inject } from '@angular/core';
 import { ToggleMenuService } from '../../services/toggle-menu.service';
 import { RightMenuComponent } from '../right-menu/right-menu.component';
 import { ContentInternalComponent } from '../content-internal/content-internal.component';
+import { TopMenuComponent } from '../top-menu/top-menu.component';
 
 @Component({
   selector: 'app-content',
   imports: [
     RightMenuComponent,
-    ContentInternalComponent
+    ContentInternalComponent,
   ],
   templateUrl: './content.component.html',
   styleUrl: './content.component.css'
