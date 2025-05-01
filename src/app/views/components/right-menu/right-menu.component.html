@@ -1,4 +1,4 @@
-<div class="h-screen pt-1 pb-1 transition-all overflow-hidden" [ngClass]="{ 'pl-0 pr-0 md:pl-2 opacity-0 md:opacity-100': !drawerService.visible(), 'p-1 opacity-100': drawerService.visible() }">
+<div class="h-screen pt-1 z-50 pb-1 transition-all overflow-hidden" [ngClass]="{ 'pl-0 pr-0 md:pl-2 opacity-0 md:opacity-100': !drawerService.visible(), 'p-1 opacity-100': drawerService.visible() }">
   <div class="duration-200 text-md absolute h-full overflow-hidden bg-color backdrop-blur-sm  rounded-xl" [ngClass]="{'md:relative! p-1 w-70' : drawerService.visible(), 'w-0 md:relative md:p-1 md:w-16' : !drawerService.visible()}">
     <span class="flex items-center mb-1 justify-between duration-200"  [ngClass]="{'justify-center': !drawerService.visible()}">
       <fa-icon class="p-1" [icon]="faWebAwesome" ></fa-icon>
@@ -6,7 +6,7 @@
     </span>
 
     <div class="container-menu-right flex flex-col h-[calc(99vh-47px)] overflow-hidden bg-color justify-between">
-      <div class="scrollbar-class h-full   mb-1  rounded-xl p-5 overflow-y-auto">
+      <div class="scrollbar-class h-full  mb-1  rounded-xl p-5 overflow-y-auto">
 
       </div>
       <div class="w-full flex flex-col gap-1">

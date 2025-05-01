@@ -1,0 +1,17 @@
+<div class="grid p-3 z-auto w-full grid-cols-1 sm:grid-cols-2 lg:grid-cols-4  gap-5 overflow-hidden">
+@for (item of items; track $index) {
+  <div class="relative h-36 pl-5 pr-5 pt-5 pb-2 shadow-md background-card  rounded-xl">
+    <div class="bg-color rounded-xl w-15 h-15 -top-3 left-[10px] flex items-center justify-center absolute">
+      <fa-icon [icon]="icons[item.icon]" class="text-3xl"></fa-icon>
+    </div>
+
+    <h2 class="text-end font-light">{{item.title | titlecase }}</h2>
+    <h3 class="text-xl text-end font-bold" [ngClass]="item.value > 0 ? 'text-green-600' : ''">{{item.value | currency }}</h3>
+
+    <div class="flex gap-2 absolute bottom-5">
+      <p class="font-bold" [ngClass]="item.percentage < 0 ? 'text-red-500' : 'text-green-600'"> {{item.percentage | percent}}  </p>
+      <p class="font-light">{{item.message | titlecase }}</p>
+    </div>
+  </div>
+}
+</div>

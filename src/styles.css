@@ -13,8 +13,6 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 
-
-
 .bg-color{
   @apply
   dark:bg-slate-900
@@ -28,12 +26,10 @@
   duration-200
 
 }
-
 .scrollbar-class{
   @apply
   scrollbar-thin scrollbar-thumb-gray-400 scrollbar-thumb-rounded-full scrollbar-track-transparent scrollbar-track-rounded-full overflow-auto
 }
-
 .bg-color-custom{
   @apply
   dark:bg-gradient-to-br dark:from-slate-400 dark:to-gray-800
@@ -49,7 +45,6 @@
 .bg-color-side {
   @apply bg-green-200 dark:bg-green-900 duration-200;
 }
-
 .bg-color-container{
   @apply
   bg-slate-100
@@ -57,7 +52,6 @@
 
   duration-200
 }
-
 .bg-color-button{
   @apply
   hover:cursor-pointer
@@ -81,7 +75,6 @@
   hover:bg-slate-800
   hover:text-white
 }
-
 .bg-color-button-right-menu{
   @apply
   hover:cursor-pointer
@@ -103,7 +96,6 @@
   hover:bg-slate-800
   hover:text-white
 }
-
 .input-behavior{
   @apply
   outline-2
@@ -156,8 +148,6 @@
    border-2
    border-white
 }
-
-
 .floating-menu {
   @apply
   absolute
@@ -181,9 +171,15 @@
   opacity: 0;
   visibility: hidden;
 }
-
 .floating-menu.fadein {
   max-height: 50vh;
   opacity: 1;
   visibility: visible;
+}
+
+.background-card{
+  @apply
+  dark:bg-slate-600
+  bg-slate-100
+  duration-200
 }
