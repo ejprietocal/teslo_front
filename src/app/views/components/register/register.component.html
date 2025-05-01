@@ -1,11 +1,11 @@
 <div class="h-screen flex items-center justify-center bg-color-general">
 
-  <div class="w-[90%] sm:w-[80%] md:w-[80%] lg:w-[75%] xl:w-[65%] lg:h-[80%] xl:h-[88%] bg-white shadow-2xl rounded-xl grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
+  <div class="w-[95%] sm:w-[80%] h-full lg:h-fit max-h-[85%] bg-white shadow-2xl rounded-xl grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
 
     <div class="bg-color hidden lg:block">
       <img src="assets/images/registerimage.png" alt="logo" class="w-full h-[90%] hidden lg:block overflow-auto">
     </div>
-    <div class="p-10 bg-color h-[90%]  overflow-auto" >
+    <div class="p-5 bg-color scrollbar-class">
       <h1 class="text-2xl font-bold bg-color">Registro</h1>
 
       <form action="" class="mt-4 p-5" [formGroup]="form" (ngSubmit)="registrarData()">

@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { ToggleMenuService } from '../../services/toggle-menu.service';
 import { faBars, faSun, faMoon, faGrip, faRightFromBracket, faXmark, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -6,6 +6,7 @@ import { DarkModeService } from '../../services/dark-mode.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Tooltip } from 'primeng/tooltip';
+import { MenuItem } from 'primeng/api';
 
 
 @Component({
@@ -13,12 +14,17 @@ import { Tooltip } from 'primeng/tooltip';
   imports: [
     FontAwesomeModule,
     CommonModule,
-    Tooltip
+    Tooltip,
   ],
   templateUrl: './top-menu.component.html',
   styleUrl: './top-menu.component.css'
 })
-export class TopMenuComponent {
+export class TopMenuComponent  {
+  items: MenuItem[] | undefined;
+
+  home: MenuItem | undefined;
+
+
 
   public readonly drawerService = inject(ToggleMenuService);
   public readonly darkModeService = inject(DarkModeService);
