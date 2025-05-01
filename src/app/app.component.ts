@@ -4,13 +4,15 @@ import { TopMenuComponent } from './views/components/top-menu/top-menu.component
 import { CommonModule } from '@angular/common';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ActivateLoaderService } from './services/activate-loader.service';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-root',
   imports: [
     CommonModule,
     RouterOutlet,
-    LoaderComponent
+    LoaderComponent,
+    ToastModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

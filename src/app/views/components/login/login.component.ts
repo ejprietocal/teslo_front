@@ -8,7 +8,6 @@ import { User } from '../../../interfaces/user';
 import { Router } from '@angular/router';
 import { faBars, faSun, faMoon, faGrip, faRightFromBracket} from '@fortawesome/free-solid-svg-icons'
 
-import { ToastModule } from 'primeng/toast';
 import { LoginService } from '../../services/login.service';
 import { DarkModeService } from '../../services/dark-mode.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -24,7 +23,6 @@ import { ReCaptchaV3Service } from 'ng-recaptcha-2';
     InputGroupAddonModule,
     FormsModule,
     ReactiveFormsModule,
-    ToastModule,
     FontAwesomeModule
 
   ],
