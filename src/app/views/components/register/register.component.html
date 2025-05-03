@@ -1,17 +1,21 @@
-<div class="h-screen flex items-center justify-center bg-color-general">
+<div class="min-h-screen flex items-center justify-center bg-color-general py-8">
 
-  <div class="w-[95%] sm:w-[80%] h-full lg:h-fit max-h-[85%] bg-white shadow-2xl rounded-xl grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
+  <div class="w-full max-w-screen-lg bg-white shadow-2xl rounded-xl grid grid-cols-1 lg:grid-cols-2  overflow-hidden">
 
+    <!-- Imagen (solo en pantallas grandes) -->
     <div class="bg-color hidden lg:block">
-      <img src="assets/images/registerimage.png" alt="logo" class="w-full h-[90%] hidden lg:block overflow-auto">
+      <img src="assets/images/registerimage.png" alt="logo" class="w-full h-full object-cover">
     </div>
-    <div class="p-5 bg-color scrollbar-class">
+
+    <!-- Formulario -->
+    <div class="p-6 sm:p-8 bg-color h-full">
+
       <h1 class="text-2xl font-bold bg-color">Registro</h1>
 
-      <form action="" class="mt-4 p-5" [formGroup]="form" (ngSubmit)="registrarData()">
+      <form action="" class="mt-2 p-5" [formGroup]="form" (ngSubmit)="registrarData()">
         <fieldset class="border-1 p-4 rounded-md mb-6">
           <legend class="text-lg font-semibold px-2">Datos Personales</legend>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-1 mt-2 mb-2">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-1 mt-2 mb-3">
             <div>
               <input type="text" id="nombre" name="nombre" formControlName="nombre" placeholder="Nombres" class="input-behavior" required   >
               @if(form.get('nombre')?.hasError('required') && form.get('nombre')?.touched){
@@ -35,14 +39,14 @@
           name="cedula"
           formControlName="cedula"
           placeholder="Cedula"
-          required  class="input-behavior mb-2">@if(form.get('cedula')?.hasError('required') && form.get('cedula')?.touched){
+          required  class="input-behavior mb-3">@if(form.get('cedula')?.hasError('required') && form.get('cedula')?.touched){
             <p class="text-red-500 text-xs">Este campo es requerido</p>
           }
           <input type="text"
           id="telefono"
           name="telefono"
           formControlName="telefono"
-          required  class="input-behavior  mb-2" placeholder="Telefono">@if(form.get('telefono')?.hasError('required') && form.get('telefono')?.touched){
+          required  class="input-behavior  mb-3" placeholder="Telefono">@if(form.get('telefono')?.hasError('required') && form.get('telefono')?.touched){
             <p class="text-red-500 text-xs">Este campo es requerido</p>
           }
 
@@ -51,7 +55,7 @@
           name="email"
           formControlName="email"
           placeholder="Escribe tu email"
-          class="input-behavior mb-2"
+          class="input-behavior mb-3"
           required>
           @if(form.get('email')?.hasError('required') && form.get('email')?.touched){
             <p class="text-red-500 text-xs">Este campo es requerido</p>
@@ -59,7 +63,21 @@
           @if(form.get('email')?.hasError('email')){
               <p class="text-red-500 text-xs">El formato de correo es invalido</p>
           }
-
+          <input type="text"
+          formControlName="nombre_negocio"
+          placeholder="Nombre del Negocio"
+          required  class="input-behavior mb-3">
+          @if(form.get('nombre_negocio')?.hasError('required') && form.get('nombre_negocio')?.touched){
+            <p class="text-red-500 text-xs">Este campo es requerido</p>
+          }
+          <div class="card flex justify-center mb-3">
+            <p-select
+              [options]="cities"
+              optionLabel="name"
+              formControlName="tipo_negocio"
+              placeholder="Selecciona el Tipo de Negocio"
+              class="input-behavior " height="40px;" />
+          </div>
 
         <div class="relative">
           <input
@@ -69,7 +87,7 @@
             formControlName="password"
             placeholder="Password"
             required
-            class="input-behavior mb-2 pr-10">@if(form.get('password')?.hasError('required') && form.get('password')?.touched){
+            class="input-behavior mb-3 pr-10">@if(form.get('password')?.hasError('required') && form.get('password')?.touched){
               <p class="text-red-500 text-xs">Este campo es requerido</p>
             }
           <button type="button"
@@ -84,25 +102,11 @@
           name="confirmar_password"
           formControlName="confirmar_password"
           placeholder="Confirmar password"
-          required  class="input-behavior mb-2">
+          required  class="input-behavior mb-5">
           @if(form.hasError('passwordsNoCoinciden') && form.get('confirmar_password')?.touched){
             <p class="text-red-500 text-xs">Las contraseñas no coinciden</p>
           }
-          <input type="text"
-          formControlName="nombre_negocio"
-          placeholder="Nombre del Negocio"
-          required  class="input-behavior mb-2">
-          @if(form.get('nombre_negocio')?.hasError('required') && form.get('nombre_negocio')?.touched){
-            <p class="text-red-500 text-xs">Este campo es requerido</p>
-          }
-          <div class="card flex justify-center">
-            <p-select
-              [options]="cities"
-              optionLabel="name"
-              formControlName="tipo_negocio"
-              placeholder="Selecciona el Tipo de Negocio"
-              class="input-behavior mb-2" height="40px;" />
-          </div>
+
           <div class="card flex justify-left">
             <p-checkbox
             formControlName="checked"

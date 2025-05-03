@@ -14,12 +14,10 @@ import { ToastModule } from 'primeng/toast';
 import { RegisterService } from '../../services/register.service';
 import { Select } from 'primeng/select';
 import { Checkbox } from 'primeng/checkbox';
+import { TipoNegocio } from 'src/app/interfaces/tipo-negocio';
 
 
-interface City {
-    name: string;
-    id: number;
-}
+
 
 @Component({
   selector: 'app-register',
@@ -50,8 +48,8 @@ export class RegisterComponent {
     private readonly registerService: RegisterService,
     private readonly router: Router
   ) { }
-  cities: City[] | undefined;
-  selectedCity: City | undefined;
+  cities: TipoNegocio[] | undefined;
+  selectedCity: TipoNegocio | undefined;
   checked: boolean = false;
   nombre: string = '';
   email: string = '';
@@ -80,12 +78,35 @@ export class RegisterComponent {
 
   registrarData(): void {
     if (this.form.valid) {
-        this.recaptchaService.execute('registrarData').subscribe((token) =>{
+      this.recaptchaService.execute('registrarData').subscribe((token) => {
         this.form.get('recaptchaToken')?.setValue(token);
-        this.registerService.registrarData_service(this.form);
-      })
-    }else{
-      this.form.value
+
+        const data = this.form.value;
+        const payload = {
+          email: data.email,
+          name: data.nombre,
+          document: data.cedula,
+          lastName: data.apellidos,
+          password: data.checked,
+          checkPersonalData: data.password,
+          confirm_password: data.confirmar_password,
+          tipeBusiness: data.tipo_negocio.id, // si es objeto
+          nameBussiness: data.nombre_negocio,
+          recaptchaToken: data.recaptchaToken
+        };
+
+        this.registerService.registrarData_service(payload).subscribe({
+          next: (res) => {
+            console.log('Registro exitoso', res);
+            this.router.navigate(['/login']); // o lo que necesites
+          },
+          error: (err) => {
+            console.error('Error al registrar:', err);
+          }
+        });
+      });
+    } else {
+      this.form.markAllAsTouched();
     }
   }
 
