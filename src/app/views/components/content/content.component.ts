@@ -16,6 +16,4 @@ export class ContentComponent {
 
   private readonly toggleMenuService = inject(ToggleMenuService);
 
-
-
 }
