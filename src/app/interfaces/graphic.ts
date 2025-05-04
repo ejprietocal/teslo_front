@@ -1,17 +1,14 @@
-
 export interface Graphic {
-  titleGeneral: string;
-  xTitle: string;
-  yTitle: string;
+  labels: string[];
+  labelDataSet: string;
   data: Data[];
-  colorScheme: string[];
+  borderColor: string;
+  fill : boolean;
+  id : string;
+  type: 'line' | 'bar' | 'doughnut' | 'pie' | 'polarArea' | 'bubble';
+  color : string;
 }
 
 interface Data {
-  xValue: number | string;
-  yValue: number | string;
-
-  label?: string;
-  color?: string;
-  group?: string;
+  data : number;
 }

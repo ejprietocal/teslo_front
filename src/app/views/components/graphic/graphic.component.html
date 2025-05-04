@@ -1,10 +1,12 @@
 
-<div class="p-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-2 mb-2">
-  @for (item of items; track $index) {
-    <div class="w-full h-96 bg-color rounded-xl">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-2 mb-2">
 
-    </div>
+  @for (item of items; track $index) {
+    <canvas class="w-full h-96 bg-color rounded-xl p-2" [id]="item.id" #chartContainerView>
+      {{chart}}
+    </canvas>
   }
+
 </div>
 
 

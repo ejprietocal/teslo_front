@@ -55,148 +55,58 @@ export class ContentInternalComponent implements OnInit {
 
     this.graphic = [
       {
-        titleGeneral: 'Ingreso hoy',
-        xTitle: 'Mes',
-        yTitle: 'Ingreso',
+        labels:['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'],
+        labelDataSet: 'Ingreso Semana Actual',
         data: [
           {
-            xValue: 1,
-            yValue: 100
+            data: 100
           },
           {
-            xValue: 2,
-            yValue: 200
+            data: 200
           },
           {
-            xValue: 3,
-            yValue: 300
+            data: 120
           },
           {
-            xValue: 4,
-            yValue: 400
+            data: 100
           },
           {
-            xValue: 5,
-            yValue: 500
-          },
-          {
-            xValue: 6,
-            yValue: 600
-          },
-          {
-            xValue: 7,
-            yValue: 700
-          },
-          {
-            xValue: 8,
-            yValue: 800
-          },
-          {
-            xValue: 9,
-            yValue: 900
-          },
-          {
-            xValue: 10,
-            yValue: 1000
+            data: 500
           }
         ],
-        colorScheme: ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF', '#800080', '#800000', '#008080', '#000080']
+        borderColor: '#FFFFFF',
+        fill: true,
+        type: 'line',
+        id: 'chartContainer',
+        color: "#FFFFFF"
+
       },
       {
-        titleGeneral: 'Ingreso acumulado',
-        xTitle: 'Mes',
-        yTitle: 'Ingreso',
+        labels:['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'],
+        labelDataSet: 'Ingreso Semana Actual',
         data: [
           {
-            xValue: 1,
-            yValue: 100
+            data: 100
           },
           {
-            xValue: 2,
-            yValue: 200
+            data: 200
           },
           {
-            xValue: 3,
-            yValue: 300
+            data: 120
           },
           {
-            xValue: 4,
-            yValue: 400
+            data: 100
           },
           {
-            xValue: 5,
-            yValue: 500
-          },
-          {
-            xValue: 6,
-            yValue: 600
-          },
-          {
-            xValue: 7,
-            yValue: 700
-          },
-          {
-            xValue: 8,
-            yValue: 800
-          },
-          {
-            xValue: 9,
-            yValue: 900
-          },
-          {
-            xValue: 10,
-            yValue: 1000
+            data: 500
           }
         ],
-        colorScheme: ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF', '#800080', '#800000', '#008080', '#000080']
-      },
-      {
-        titleGeneral: 'Total domicilios',
-        xTitle: 'Mes',
-        yTitle: 'Total',
-        data: [
-          {
-            xValue: 1,
-            yValue: 100
-          },
-          {
-            xValue: 2,
-            yValue: 200
-          },
-          {
-            xValue: 3,
-            yValue: 300
-          },
-          {
-            xValue: 4,
-            yValue: 400
-          },
-          {
-            xValue: 5,
-            yValue: 500
-          },
-          {
-            xValue: 6,
-            yValue: 600
-          },
-          {
-            xValue: 7,
-            yValue: 700
-          },
-          {
-            xValue: 8,
-            yValue: 800
-          },
-          {
-            xValue: 9,
-            yValue: 900
-          },
-          {
-            xValue: 10,
-            yValue: 1000
-          }
-        ],
-        colorScheme: ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF', '#800080', '#800000', '#008080', '#000080']
+        borderColor: '#FFFFFF',
+        fill: true,
+        type: 'bar',
+        id: 'chartContainer',
+        color: "#FFFFFF"
+
       },
     ];
   }

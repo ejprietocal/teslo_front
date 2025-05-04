@@ -1,9 +1,10 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, ViewChildren } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DarkModeService {
+
 
   readonly darkMode = signal(false);
   private readonly element = document.querySelector('html')!;
@@ -15,11 +16,16 @@ export class DarkModeService {
     this.darkMode.set(prefersDark);
     this.element.classList.toggle('dark', prefersDark);
 
+
+
     // Escuchar cambios en la preferencia del sistema
     this.mediaQuery.addEventListener('change', e => {
       this.darkMode.set(e.matches);
       this.element.classList.toggle('dark', e.matches);
     });
+
+
+
   }
 
   toggleDarkMode() {
