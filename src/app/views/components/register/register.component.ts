@@ -9,12 +9,12 @@ import { Router } from '@angular/router';
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReCaptchaV3Service } from 'ng-recaptcha-2';
-
 import { ToastModule } from 'primeng/toast';
 import { RegisterService } from '../../services/register.service';
 import { Select } from 'primeng/select';
 import { Checkbox } from 'primeng/checkbox';
 import { TipoNegocio } from 'src/app/interfaces/tipo-negocio';
+import { MessageService } from 'primeng/api';
 
 
 
@@ -46,10 +46,11 @@ export class RegisterComponent {
 
   constructor (
     private readonly registerService: RegisterService,
+    private messageService: MessageService,
     private readonly router: Router
   ) { }
-  cities: TipoNegocio[] | undefined;
-  selectedCity: TipoNegocio | undefined;
+  tipo_negocio: TipoNegocio[] | undefined;
+  selectedTipoNegocio: TipoNegocio | undefined;
   checked: boolean = false;
   nombre: string = '';
   email: string = '';
@@ -78,11 +79,12 @@ export class RegisterComponent {
 
   registrarData(): void {
     if (this.form.valid) {
+
       this.recaptchaService.execute('registrarData').subscribe((token) => {
         this.form.get('recaptchaToken')?.setValue(token);
 
         const data = this.form.value;
-        const payload = {
+        const data_service = {
           email: data.email,
           name: data.nombre,
           document: data.cedula,
@@ -95,17 +97,24 @@ export class RegisterComponent {
           recaptchaToken: data.recaptchaToken
         };
 
-        this.registerService.registrarData_service(payload).subscribe({
+        this.registerService.registrarData_service(data_service).subscribe({
           next: (res) => {
-            console.log('Registro exitoso', res);
-            this.router.navigate(['/login']); // o lo que necesites
+
+            this.messageService.add({ severity: 'success', summary: 'Registro exitoso' });
+            this.router.navigate(['./']);
           },
           error: (err) => {
-            console.error('Error al registrar:', err);
+
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: err.error?.message || 'Ocurrió un error al realizar el registro'
+            });
           }
         });
       });
     } else {
+
       this.form.markAllAsTouched();
     }
   }
@@ -125,7 +134,7 @@ export class RegisterComponent {
   }
 
   ngOnInit() {
-    this.cities = [
+    this.tipo_negocio = [
         { name: 'Ferreterias', id: 1 },
         { name: 'Restaurantes o Comidas rápidas', id: 2 },
         { name: 'Tienda de barrio', id: 3 },
@@ -133,6 +142,10 @@ export class RegisterComponent {
         { name: 'Panadería', id: 5 },
         { name: 'Ropa, Calzado y Accesorios', id: 6 }
     ];
-}
+  }
+
+  irLogin(){
+    this.router.navigate(['./']);
+  }
 
 }

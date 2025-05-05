@@ -1,69 +1,23 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Injectable, signal } from '@angular/core';
 import { User } from '../../interfaces/user';
-import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
-import { ActivateLoaderService } from '../../services/activate-loader.service';
-
+import { Observable } from 'rxjs';
+import { environment } from '@environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterService {
 
-  constructor(
-    private http : HttpClient,
-    private router : Router,
-    private messageService: MessageService,
-    private readonly activateLoader : ActivateLoaderService,
-  ) { }
 
   public datosUser = signal<User | null>(null);
+  private readonly API_URL = environment.URL_REGISTER; // variable de entorno
 
+  constructor(private http: HttpClient) {}
 
-
-  // registrarData_service(form: FormGroup): void {
-  //   this.activateLoader.activateSignal();
-
-  //   const { email, nombre, apellidos, cedula, password, telefono, nombre_negocio, tipo_negocio, recaptchaToken } = form.value;
-
-  //   const payload = {
-  //     email,
-  //     nombre,
-  //     apellidos,
-  //     cedula,
-  //     password,
-  //     telefono,
-  //     nombre_negocio,
-  //     tipo_negocio: typeof tipo_negocio === 'object' ? tipo_negocio.id : tipo_negocio, // asegúrate de enviar el ID
-  //     recaptchaToken
-  //   };
-
-  //   this.http.post<any>('https://tesloback-production.up.railway.app/api/register', payload).subscribe({
-  //     next: (res) => {
-  //       this.messageService.add({
-  //         severity: 'success',
-  //         summary: 'Registro exitoso',
-  //         detail: 'Ahora puedes iniciar sesión'
-  //       });
-  //       this.router.navigate(['/login']);
-  //     },
-  //     error: (err) => {
-  //       this.messageService.add({
-  //         severity: 'error',
-  //         summary: 'Error',
-  //         detail: err.error?.message || 'Ocurrió un error al registrarse'
-  //       });
-  //       this.activateLoader.deactivateSignal();
-  //     }
-  //   });
-  // }
-  registrarData_service(payload: any) {
-    return this.http.post<any>('https://tesloback-production.up.railway.app/api/register', payload);
+  registrarData_service(data_service: any): Observable<any> {
+    return this.http.post<any>(this.API_URL, data_service);
   }
-
-
-
-
 }
+
+
