@@ -27,8 +27,7 @@ jobs:
         with:
           branch: teslo_preview
           folder: dist/teslo_front/browser
-
-  deploy:
+  deploy_ftp:
     needs: build
     runs-on: ubuntu-latest
     steps:
