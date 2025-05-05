@@ -24,8 +24,6 @@ export class TopMenuComponent  {
 
   home: MenuItem | undefined;
 
-
-
   public readonly drawerService = inject(ToggleMenuService);
   public readonly darkModeService = inject(DarkModeService);
   public readonly router = inject(Router);
