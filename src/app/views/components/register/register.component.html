@@ -1,22 +1,126 @@
-<div class="h-screen flex items-center justify-center bg-color-general">
+<div class="min-h-screen flex items-center justify-center bg-color-general py-8">
 
-  <div class="w-[95%] sm:w-[80%] h-full lg:h-fit max-h-[90%] bg-white shadow-2xl rounded-xl grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
+  <div class="w-full max-w-screen-lg bg-white shadow-2xl rounded-xl grid grid-cols-1 lg:grid-cols-2  overflow-hidden">
 
+    <!-- Imagen (solo en pantallas grandes) -->
     <div class="bg-color hidden lg:block">
-      <img src="assets/images/registerimage.png" alt="logo" class="w-full h-full hidden lg:block">
+      <img src="assets/images/registerimage.png" alt="logo" class="w-full h-full object-cover">
     </div>
-    <div class="p-5 bg-color scrollbar-class">
+
+    <!-- Formulario -->
+    <div class="p-6 sm:p-8 bg-color h-full">
+
       <h1 class="text-2xl font-bold bg-color">Registro</h1>
 
-      <form action="" class="mt-4">
-        <fieldset class="border-1 p-4 rounded-md">
+      <form action="" class="mt-2 p-5" [formGroup]="form" (ngSubmit)="registrarData()">
+        <fieldset class="border-1 p-4 rounded-md mb-6">
           <legend class="text-lg font-semibold px-2">Datos Personales</legend>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-1 mt-2 mb-2">
-            <input type="text" class="input-behavior" placeholder="Nombres">
-            <input type="text" class="input-behavior" placeholder="Apellidos">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-1 mt-2 mb-3">
+            <div>
+              <input type="text" id="nombre" name="nombre" formControlName="nombre" placeholder="Nombres" class="input-behavior" required   >
+              @if(form.get('nombre')?.hasError('required') && form.get('nombre')?.touched){
+                <p class="text-red-500 text-xs">Este campo es requerido</p>
+              }
+            </div>
+            <div>
+              <input type="text"
+              id="apellidos"
+              name="apellidos"
+              formControlName="apellidos"
+              placeholder="Apellidos"
+              class="input-behavior" >
+              @if(form.get('apellidos')?.hasError('required') && form.get('apellidos')?.touched){
+                <p class="text-red-500 text-xs">Este campo es requerido</p>
+              }
+            </div>
           </div>
-          <input type="number" class="input-behavior" placeholder="Telefono">
+          <input type="text"
+          id="cedula"
+          name="cedula"
+          formControlName="cedula"
+          placeholder="Cedula"
+          required  class="input-behavior mb-3">@if(form.get('cedula')?.hasError('required') && form.get('cedula')?.touched){
+            <p class="text-red-500 text-xs">Este campo es requerido</p>
+          }
+          <input type="text"
+          id="telefono"
+          name="telefono"
+          formControlName="telefono"
+          required  class="input-behavior  mb-3" placeholder="Telefono">@if(form.get('telefono')?.hasError('required') && form.get('telefono')?.touched){
+            <p class="text-red-500 text-xs">Este campo es requerido</p>
+          }
+
+          <input type="email"
+          id="email"
+          name="email"
+          formControlName="email"
+          placeholder="Escribe tu email"
+          class="input-behavior mb-3"
+          required>
+          @if(form.get('email')?.hasError('required') && form.get('email')?.touched){
+            <p class="text-red-500 text-xs">Este campo es requerido</p>
+          }
+          @if(form.get('email')?.hasError('email')){
+              <p class="text-red-500 text-xs">El formato de correo es invalido</p>
+          }
+          <input type="text"
+          formControlName="nombre_negocio"
+          placeholder="Nombre del Negocio"
+          required  class="input-behavior mb-3">
+          @if(form.get('nombre_negocio')?.hasError('required') && form.get('nombre_negocio')?.touched){
+            <p class="text-red-500 text-xs">Este campo es requerido</p>
+          }
+          <div class="card flex justify-center mb-3">
+            <p-select
+              [options]="tipo_negocio"
+              optionLabel="name"
+              formControlName="tipo_negocio"
+              placeholder="Selecciona el Tipo de Negocio"
+              class="input-behavior " height="40px;" />
+          </div>
+
+        <div class="relative">
+          <input
+            [type]="mostrarPassword ? 'text' : 'password'"
+            id="password"
+            name="password"
+            formControlName="password"
+            placeholder="Password"
+            required
+            class="input-behavior mb-3 pr-10">@if(form.get('password')?.hasError('required') && form.get('password')?.touched){
+              <p class="text-red-500 text-xs">Este campo es requerido</p>
+            }
+          <button type="button"
+            (click)="mostrarPassword = !mostrarPassword"
+            class="absolute right-2 top-3 flex items-center text-blue-500 text-sm">
+            <fa-icon class="text-black cursor-pointer" [icon]="mostrarPassword ? faEyeSlash : faEye"></fa-icon>
+          </button>
+        </div>
+
+          <input type="password"
+          id="confirmar_password"
+          name="confirmar_password"
+          formControlName="confirmar_password"
+          placeholder="Confirmar password"
+          required  class="input-behavior mb-5">
+          @if(form.hasError('passwordsNoCoinciden') && form.get('confirmar_password')?.touched){
+            <p class="text-red-500 text-xs">Las contraseñas no coinciden</p>
+          }
+
+          <div class="card flex justify-left">
+            <p-checkbox
+            formControlName="checked"
+            [binary]="true"
+            inputId="checkbox1">
+          </p-checkbox>
+          <label for="checkbox1" class="ml-2">Acepto términos y tratamientos de datos</label>
+        </div>
         </fieldset>
+        <p class=" mb-4">Ya tienes una cuenta? <span class="cursor-pointer" (click)="irLogin()"><strong>Iniciar sesión</strong></span></p>
+        <div class="items-center ">
+          <button class="button-behavior mx-auto block" type="submit">Registrar</button>
+        </div>
+
       </form>
     </div>
 
