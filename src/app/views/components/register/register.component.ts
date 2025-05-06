@@ -43,6 +43,7 @@ export class RegisterComponent {
 
   fb = inject(FormBuilder);
   recaptchaService = inject(ReCaptchaV3Service);
+  res: TipoNegocio[] | undefined;
 
   constructor (
     private readonly registerService: RegisterService,
@@ -89,8 +90,8 @@ export class RegisterComponent {
           name: data.nombre,
           document: data.cedula,
           lastName: data.apellidos,
-          password: data.checked,
-          checkPersonalData: data.password,
+          password: data.password,
+          checkPersonalData: data.checked,
           confirm_password: data.confirmar_password,
           tipeBusiness: data.tipo_negocio.id, // si es objeto
           nameBussiness: data.nombre_negocio,
@@ -134,18 +135,35 @@ export class RegisterComponent {
   }
 
   ngOnInit() {
-    this.tipo_negocio = [
-        { name: 'Ferreterias', id: 1 },
-        { name: 'Restaurantes o Comidas rápidas', id: 2 },
-        { name: 'Tienda de barrio', id: 3 },
-        { name: 'Farmacia o droguería', id: 4 },
-        { name: 'Panadería', id: 5 },
-        { name: 'Ropa, Calzado y Accesorios', id: 6 }
-    ];
+    this.get_tipo_negocio();
+    // this.tipo_negocio = [
+    //     { name: 'Ferreterias', id: 1 },
+    //     { name: 'Restaurantes o Comidas rápidas', id: 2 },
+    //     { name: 'Tienda de barrio', id: 3 },
+    //     { name: 'Farmacia o droguería', id: 4 },
+    //     { name: 'Panadería', id: 5 },
+    //     { name: 'Ropa, Calzado y Accesorios', id: 6 }
+    // ];
   }
 
   irLogin(){
     this.router.navigate(['./']);
   }
+  get_tipo_negocio() {
+    this.registerService.get_tipo_de_negocio().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.tipo_negocio = res
+      },
+      error: (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error?.message || 'Ocurrió un error al cargar los tipos de negocio'
+        });
+      }
+    });
+  }
+
 
 }
