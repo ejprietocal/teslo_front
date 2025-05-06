@@ -150,7 +150,7 @@
 }
 .floating-menu {
   @apply
-  absolute
+  fixed
   w-[100vw]
   h-[60vh]
   bottom-0
