@@ -15,6 +15,7 @@ import { Select } from 'primeng/select';
 import { Checkbox } from 'primeng/checkbox';
 import { TipoNegocio } from 'src/app/interfaces/tipo-negocio';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 
 
 
@@ -78,10 +79,9 @@ export class RegisterComponent {
     recaptchaToken: ['']
   },{ validators: this.passwordsIguales('password', 'confirmar_password') });
 
-  registrarData(): void {
+  registrarData(): Subscription {
     if (this.form.valid) {
-
-      this.recaptchaService.execute('registrarData').subscribe((token) => {
+      return this.recaptchaService.execute('registrarData').subscribe((token) => {
         this.form.get('recaptchaToken')?.setValue(token);
 
         const data = this.form.value;
@@ -115,8 +115,8 @@ export class RegisterComponent {
         });
       });
     } else {
-
       this.form.markAllAsTouched();
+      return new Subscription();
     }
   }
 
@@ -136,21 +136,18 @@ export class RegisterComponent {
 
   ngOnInit() {
     this.get_tipo_negocio();
-    // this.tipo_negocio = [
-    //     { name: 'Ferreterias', id: 1 },
-    //     { name: 'Restaurantes o Comidas rápidas', id: 2 },
-    //     { name: 'Tienda de barrio', id: 3 },
-    //     { name: 'Farmacia o droguería', id: 4 },
-    //     { name: 'Panadería', id: 5 },
-    //     { name: 'Ropa, Calzado y Accesorios', id: 6 }
-    // ];
+  }
+
+  ngOnDestroy(){
+    this.registrarData().unsubscribe();
+    this.get_tipo_negocio().unsubscribe();
   }
 
   irLogin(){
     this.router.navigate(['./']);
   }
-  get_tipo_negocio() {
-    this.registerService.get_tipo_de_negocio().subscribe({
+  get_tipo_negocio() : Subscription {
+    return this.registerService.get_tipo_de_negocio().subscribe({
       next: (res) => {
         console.log(res);
         this.tipo_negocio = res
@@ -164,6 +161,5 @@ export class RegisterComponent {
       }
     });
   }
-
 
 }

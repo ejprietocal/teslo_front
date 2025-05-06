@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { environment } from '@environments/environment';
 
@@ -9,10 +9,7 @@ import { environment } from '@environments/environment';
 export class LoginService {
 
   private readonly environments  = environment;
-
-  constructor(
-    private http : HttpClient,
-  ) {}
+  private readonly http = inject(HttpClient)
 
   login(form: FormGroup)  {
     return this.http.post<any>(this.environments.URL_LOGIN, form.value)

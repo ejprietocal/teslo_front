@@ -7,7 +7,6 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { User } from '../../../interfaces/user';
 import { Router } from '@angular/router';
 import { faBars, faSun, faMoon, faGrip} from '@fortawesome/free-solid-svg-icons'
-
 import { LoginService } from '../../services/login.service';
 import { DarkModeService } from '../../services/dark-mode.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -44,16 +43,14 @@ export class LoginComponent  {
 
   public datosUser = signal<User | null>(null);
 
-  loginSuscription : Subscription | undefined;
-
   fb = inject(FormBuilder);
   recaptchaService = inject(ReCaptchaV3Service);
   activateLoader = inject(ActivateLoaderService);
   messageService = inject(MessageService);
+  loginService = inject(LoginService);
+  router = inject(Router);
 
   constructor(
-    private readonly loginService: LoginService,
-    private readonly router: Router,
     public readonly darkModeService : DarkModeService,
   ) { }
 
