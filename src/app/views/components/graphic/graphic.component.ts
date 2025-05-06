@@ -38,7 +38,7 @@ export class GraphicComponent implements  AfterViewInit {
           type: chartData.type, // Usamos el tipo especificado
           data: data,
           options: {
-            responsive: false,
+            responsive: true,
             maintainAspectRatio: true,
             plugins: {
               colors: {

@@ -27,3 +27,29 @@ jobs:
         with:
           branch: teslo_preview
           folder: dist/teslo_front/browser
+  deploy_ftp:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: 📂 Descargar la última versión de teslo_preview
+        run: |
+          git fetch origin teslo_preview
+          git checkout teslo_preview
+
+      - name: 🚀 Subir archivos al servidor FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_URL_TESLO }}
+          username: ${{ secrets.FTP_USER_TESLO }}
+          password: ${{ secrets.FTP_PASSWORD_TESLO }}
+          port: 21
+          protocol: ftp
+          local-dir: ./
+          server-dir: /public_html/
+          exclude: |
+            .git
+            .github
+          dangerous-clean-slate: true  # Esta opción borra todos los archivos en el servidor antes de hacer el despliegue
