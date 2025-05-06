@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, input, Input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faMoneyBill, faMotorcycle, faMoneyBillTrendUp, faStore, IconDefinition  } from '@fortawesome/free-solid-svg-icons';
 import { ItemCardTop } from 'src/app/interfaces/item-card-top';
@@ -15,7 +15,7 @@ import { ItemCardTop } from 'src/app/interfaces/item-card-top';
 })
 export class TopCardComponent {
 
-  @Input() items: ItemCardTop[] = [];
+  items = input.required<ItemCardTop[]>();
 
   icons :{ [key: string]: IconDefinition } = {
     'faMoneyBill' : faMoneyBill,
