@@ -39,12 +39,6 @@ jobs:
           git fetch origin teslo_preview
           git checkout teslo_preview
 
-      - name: 🔍 Verificar secrets disponibles
-        run: |
-          echo "URL: ${{ secrets.FTP_URL_TESLO != '' && 'OK' || 'Missing' }}"
-          echo "USER: ${{ secrets.FTP_USER_TESLO != '' && 'OK' || 'Missing' }}"
-          echo "PASSWORD: ${{ secrets.FTP_PASSWORD_TESLO != '' && 'OK' || 'Missing' }}"
-
       - name: 🚀 Subir archivos al servidor FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
