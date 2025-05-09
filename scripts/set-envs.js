@@ -2,7 +2,7 @@ const { writeFileSync, mkdirSync } = require('fs');
 const dotenv = require('dotenv');
 
 // Determina cuál archivo de entorno usar
-const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env';
+const envFile = process.env.NODE_ENV === 'production' ? '.env.prod' : '.env';
 dotenv.config({ path: envFile });
 
 // Rutas de los archivos de configuración
