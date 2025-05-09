@@ -83,6 +83,7 @@ export class RegisterComponent {
 
   registrarData(): Subscription {
     if (this.form.valid) {
+      this.activatedLoader.activateSignal();
       return this.recaptchaService.execute('registrarData').subscribe((token) => {
         this.form.get('recaptchaToken')?.setValue(token);
 
@@ -102,12 +103,12 @@ export class RegisterComponent {
 
         this.registerService.registrarData_service(data_service).subscribe({
           next: (res) => {
-
+            this.activatedLoader.deactivateSignal();
             this.messageService.add({ severity: 'success', summary: 'Registro exitoso' });
             this.router.navigate(['./']);
           },
           error: (err) => {
-
+            this.activatedLoader.deactivateSignal();
             this.messageService.add({
               severity: 'error',
               summary: 'Error',

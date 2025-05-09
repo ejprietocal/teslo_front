@@ -75,6 +75,10 @@ export class ResetPasswordComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+     this.onSubmitResetPassword().unsubscribe();
+  }
+
   ngOnInit(): void {
     this.jwtAuth = this.route.snapshot.paramMap.get('token');
   }
