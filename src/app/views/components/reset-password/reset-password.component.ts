@@ -52,7 +52,7 @@ export class ResetPasswordComponent implements OnInit {
             this.messageService.add({
               severity: 'success',
               summary: 'Éxito',
-              detail: 'Tu cuenta ha sido recuperada, se envio un correo con las instrucciones para completar el proceso',
+              detail: 'Tu cuenta ha sido recuperada, por favor ingresa con tu nueva contraseña',
               life: 5000
             });
           },
