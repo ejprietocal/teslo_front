@@ -16,6 +16,7 @@ import { Checkbox } from 'primeng/checkbox';
 import { TipoNegocio } from 'src/app/interfaces/tipo-negocio';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
+import { ActivateLoaderService } from 'src/app/services/activate-loader.service';
 
 
 
@@ -43,6 +44,7 @@ export class RegisterComponent {
   public datosUser = signal<User | null>(null);
 
   fb = inject(FormBuilder);
+  activatedLoader = inject(ActivateLoaderService);
   recaptchaService = inject(ReCaptchaV3Service);
   res: TipoNegocio[] | undefined;
 
@@ -136,6 +138,7 @@ export class RegisterComponent {
 
   ngOnInit() {
     this.get_tipo_negocio();
+    this.activatedLoader.deactivateSignal();
   }
 
   ngOnDestroy(){

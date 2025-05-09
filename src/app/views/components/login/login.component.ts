@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { PasswordModule } from 'primeng/password';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
@@ -31,7 +31,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent  {
+export class LoginComponent implements OnInit {
 
   value: string = '';
   password: string = '';
@@ -53,6 +53,11 @@ export class LoginComponent  {
   constructor(
     public readonly darkModeService : DarkModeService,
   ) { }
+
+
+  ngOnInit(): void {
+    this.activateLoader.deactivateSignal();
+  }
 
 
   ngOnDestroy(): void {
@@ -91,6 +96,10 @@ export class LoginComponent  {
           }
         });
     })
+  }
+
+  retrieveAccount(): void {
+    this.router.navigate(['/retrieve-account']);
   }
 
   registration(): void {

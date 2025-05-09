@@ -1,0 +1,36 @@
+<div class="w-screen min-h-screen h-full flex items-center justify-center">
+
+  <div class="w-80 h-fit bg-color rounded-xl shadow-xl p-2">
+    <h2 class="text-center uppercase text-2xl font-bold p-5">Recuperar cuenta</h2>
+    <p class="text-center p-5">Ingresa tu correo para recuperar tu cuenta</p>
+    <form [formGroup]="form" (ngSubmit)="onSubmitRetrieveAccount()" class="flex flex-col justify-between gap-10 p-3">
+      <div class="flex flex-col gap-2">
+        <label for="email" class="block mt-2 mb-3 text-xl">Correo</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          formControlName="email"
+          placeholder="Escribe tu correo"
+          class="input-behavior"
+          required>
+          @if(form.get('email')?.hasError('required') && form.get('email')?.touched){
+              <p class="text-red-500 text-xs">Este campo es requerido</p>
+          }
+          @if(form.get('email')?.hasError('email')){
+              <p class="text-red-500 text-xs">El formato de correo es invalido</p>
+          }
+      </div>
+      <div class="flex items-center justify-between pt-5">
+        <button type="submit" class="bg-color-button pt-5 pb-5" [disabled]="form.invalid">
+          Recuperar
+        </button>
+      </div>
+
+      <p class="text-sm font-bold">
+        <span class="cursor-pointer hover:text-blue-500" (click)="this.router.navigate(['/'])"> <fa-icon [icon]="faArrowLeft"></fa-icon> ir a ingresar</span>
+      </p>
+    </form>
+  </div>
+
+</div>

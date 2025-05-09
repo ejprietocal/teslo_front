@@ -6,4 +6,6 @@ export const environment = {
   URL_CHECK_TOKEN : 'https://tesloback-production.up.railway.app/api/auth/check-status',
   URL_BUSINESS_TYPES : 'https://tesloback-production.up.railway.app/api/business/business_types',
   CLAVE_SITIO_WEB_RECAPTCHA: '6LfCcSYrAAAAAOvE3WWa8whL_76ZL6BAaoS-Fzxu',
+  URL_RETRIEVE_ACCOUNT : 'https://tesloback-production.up.railway.app/api/auth/request-reset-password',
+  URL_RESET_PASSWORD: 'https://tesloback-production.up.railway.app/api/auth/reset-password',
 };

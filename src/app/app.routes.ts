@@ -17,6 +17,14 @@ export const routes: Routes = [
     loadComponent: () => import('./views/components/register/register.component').then(m => m.RegisterComponent),
   },
   {
+    path: 'retrieve-account',
+    loadComponent: () => import('./views/components/retrieve-account/retrieve-account.component').then(m => m.RetrieveAccountComponent),
+  },
+  {
+    path: 'api/auth/reset-password/:token',
+    loadComponent: () => import('./views/components/reset-password/reset-password.component').then(m => m.ResetPasswordComponent),
+  },
+  {
     path: '**',
     loadComponent: () => import('./views/components/not-found/not-found.component').then(m => m.NotFoundComponent)
   },
