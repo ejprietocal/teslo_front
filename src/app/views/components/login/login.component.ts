@@ -11,6 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReCaptchaV3Service } from 'ng-recaptcha-2';
 import { ActivateLoaderService } from '../../../services/activate-loader.service';
 import { Subscription } from 'rxjs';
+import { ToastService } from 'src/app/services/toast.service';
 
 
 @Component({
@@ -19,13 +20,14 @@ import { Subscription } from 'rxjs';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    FontAwesomeModule
-
+    FontAwesomeModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
+
+
 
   value: string = '';
   password: string = '';
@@ -40,6 +42,7 @@ export class LoginComponent implements OnInit {
   fb = inject(FormBuilder);
   recaptchaService = inject(ReCaptchaV3Service);
   activateLoader = inject(ActivateLoaderService);
+  toast = inject(ToastService);
   loginService = inject(LoginService);
   router = inject(Router);
 
@@ -80,12 +83,12 @@ export class LoginComponent implements OnInit {
             console.error('Error en la solicitud de login:', err);
             this.activateLoader.deactivateSignal();
             localStorage.removeItem('auth_token');
-            // this.messageService.add({
-            //   severity: 'error',
-            //   summary: 'Error',
-            //   detail: err.error.message,
-            //   life: 2000
-            // });
+            this.toast.show({
+              message: err.error.message,
+              icon: '',
+              color: 'error',
+              duration: 5000
+            });
           }
         });
     })

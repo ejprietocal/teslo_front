@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ActivateLoaderService } from './services/activate-loader.service';
 import { DarkModeService } from './views/services/dark-mode.service';
+import { initFlowbite } from 'flowbite';
+import { ToastComponent } from './components/toast/toast.component';
 
 @Component({
   selector: 'app-root',
@@ -12,21 +14,21 @@ import { DarkModeService } from './views/services/dark-mode.service';
     CommonModule,
     RouterOutlet,
     LoaderComponent,
+    ToastComponent,
 
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent  {
-
+export class AppComponent  implements OnInit {
 
   public readonly loaderService = inject(ActivateLoaderService);
   public readonly darkModeService = inject(DarkModeService);
-
-
-
   title = 'teslo_front';
 
+  ngOnInit(): void {
+    initFlowbite();
+  }
 
   themeChecked: boolean = false;  // Variable para almacenar el estado de `checked` desde el hijo
   onCheckedChange(value: boolean): void {
