@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReCaptchaV3Service } from 'ng-recaptcha-2';
 import { ActivateLoaderService } from 'src/app/services/activate-loader.service';
-import { MessageService } from 'primeng/api';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
@@ -29,7 +28,6 @@ export class ResetPasswordComponent implements OnInit {
   resetPasswordService = inject(ResetPasswordService);
   recaptchaService = inject(ReCaptchaV3Service);
   activateLoader = inject(ActivateLoaderService);
-  messageService = inject(MessageService);
 
     faArrowLeft = faArrowLeft;
 
@@ -49,12 +47,12 @@ export class ResetPasswordComponent implements OnInit {
         this.form.get('recaptchaToken')?.setValue(token);
         this.resetPasswordService.resetPassword(this.form.value, this.jwtAuth).subscribe({
           next: (res) => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Éxito',
-              detail: 'Tu cuenta ha sido recuperada, por favor ingresa con tu nueva contraseña',
-              life: 5000
-            });
+            // this.messageService.add({
+            //   severity: 'success',
+            //   summary: 'Éxito',
+            //   detail: 'Tu cuenta ha sido recuperada, por favor ingresa con tu nueva contraseña',
+            //   life: 5000
+            // });
           },
           complete: () => {
             this.activateLoader.deactivateSignal();
@@ -63,12 +61,12 @@ export class ResetPasswordComponent implements OnInit {
           error: (err) => {
             console.error('Error en la solicitud de login:', err);
             this.activateLoader.deactivateSignal();
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: err.error.message,
-              life: 2000
-            });
+            // this.messageService.add({
+            //   severity: 'error',
+            //   summary: 'Error',
+            //   detail: err.error.message,
+            //   life: 2000
+            // });
           }
         });
       });

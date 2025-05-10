@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { PasswordModule } from 'primeng/password';
-import { InputGroupModule } from 'primeng/inputgroup';
-import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from '../../../interfaces/user';
 import { Router } from '@angular/router';
@@ -12,7 +10,6 @@ import { DarkModeService } from '../../services/dark-mode.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReCaptchaV3Service } from 'ng-recaptcha-2';
 import { ActivateLoaderService } from '../../../services/activate-loader.service';
-import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 
 
@@ -20,9 +17,6 @@ import { Subscription } from 'rxjs';
   selector: 'app-login',
   imports: [
     CommonModule,
-    PasswordModule,
-    InputGroupModule,
-    InputGroupAddonModule,
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule
@@ -46,7 +40,6 @@ export class LoginComponent implements OnInit {
   fb = inject(FormBuilder);
   recaptchaService = inject(ReCaptchaV3Service);
   activateLoader = inject(ActivateLoaderService);
-  messageService = inject(MessageService);
   loginService = inject(LoginService);
   router = inject(Router);
 
@@ -87,12 +80,12 @@ export class LoginComponent implements OnInit {
             console.error('Error en la solicitud de login:', err);
             this.activateLoader.deactivateSignal();
             localStorage.removeItem('auth_token');
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: err.error.message,
-              life: 2000
-            });
+            // this.messageService.add({
+            //   severity: 'error',
+            //   summary: 'Error',
+            //   detail: err.error.message,
+            //   life: 2000
+            // });
           }
         });
     })

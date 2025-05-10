@@ -5,8 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DarkModeService } from '../../services/dark-mode.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Tooltip } from 'primeng/tooltip';
-import { MenuItem } from 'primeng/api';
+
 
 
 @Component({
@@ -14,15 +13,15 @@ import { MenuItem } from 'primeng/api';
   imports: [
     FontAwesomeModule,
     CommonModule,
-    Tooltip,
+
   ],
   templateUrl: './top-menu.component.html',
   styleUrl: './top-menu.component.css'
 })
 export class TopMenuComponent  {
-  items: MenuItem[] | undefined;
 
-  home: MenuItem | undefined;
+
+
 
   public readonly drawerService = inject(ToggleMenuService);
   public readonly darkModeService = inject(DarkModeService);

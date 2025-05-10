@@ -1,20 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Signal, signal } from '@angular/core';
-import { PasswordModule } from 'primeng/password';
-import { InputGroupModule } from 'primeng/inputgroup';
-import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { User } from '../../../interfaces/user';
 import { Router } from '@angular/router';
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReCaptchaV3Service } from 'ng-recaptcha-2';
-import { ToastModule } from 'primeng/toast';
+
 import { RegisterService } from '../../services/register.service';
-import { Select } from 'primeng/select';
-import { Checkbox } from 'primeng/checkbox';
+
 import { TipoNegocio } from 'src/app/interfaces/tipo-negocio';
-import { MessageService } from 'primeng/api';
+
 import { Subscription } from 'rxjs';
 import { ActivateLoaderService } from 'src/app/services/activate-loader.service';
 
@@ -26,14 +22,11 @@ import { ActivateLoaderService } from 'src/app/services/activate-loader.service'
   standalone: true,
   imports: [
     CommonModule,
-    PasswordModule,
-    InputGroupModule,
-    InputGroupAddonModule,
     FormsModule,
     ReactiveFormsModule,
-    ToastModule,
+
     FontAwesomeModule,
-    Select,Checkbox
+
 
   ],
   templateUrl: './register.component.html',
@@ -50,7 +43,6 @@ export class RegisterComponent {
 
   constructor (
     private readonly registerService: RegisterService,
-    private messageService: MessageService,
     private readonly router: Router
   ) { }
   tipo_negocio: TipoNegocio[] | undefined;
@@ -104,16 +96,16 @@ export class RegisterComponent {
         this.registerService.registrarData_service(data_service).subscribe({
           next: (res) => {
             this.activatedLoader.deactivateSignal();
-            this.messageService.add({ severity: 'success', summary: 'Registro exitoso' });
+            // this.messageService.add({ severity: 'success', summary: 'Registro exitoso' });
             this.router.navigate(['./']);
           },
           error: (err) => {
             this.activatedLoader.deactivateSignal();
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: err.error?.message || 'Ocurrió un error al realizar el registro'
-            });
+            // this.messageService.add({
+            //   severity: 'error',
+            //   summary: 'Error',
+            //   detail: err.error?.message || 'Ocurrió un error al realizar el registro'
+            // });
           }
         });
       });
@@ -157,11 +149,11 @@ export class RegisterComponent {
         this.tipo_negocio = res
       },
       error: (err) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: err.error?.message || 'Ocurrió un error al cargar los tipos de negocio'
-        });
+        // this.messageService.add({
+        //   severity: 'error',
+        //   summary: 'Error',
+        //   detail: err.error?.message || 'Ocurrió un error al cargar los tipos de negocio'
+        // });
       }
     });
   }

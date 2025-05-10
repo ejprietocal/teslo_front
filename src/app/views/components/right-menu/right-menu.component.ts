@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faXmark, faWebAwesome,faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
-import { Tooltip } from 'primeng/tooltip';
+
 
 
 @Component({
@@ -12,7 +12,6 @@ import { Tooltip } from 'primeng/tooltip';
   imports: [
     CommonModule,
     FontAwesomeModule,
-    Tooltip
   ],
   templateUrl: './right-menu.component.html',
   styleUrl: './right-menu.component.css'
