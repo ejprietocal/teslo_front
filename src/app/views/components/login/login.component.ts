@@ -4,7 +4,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from '../../../interfaces/user';
 import { Router } from '@angular/router';
-import { faBars, faSun, faMoon, faGrip} from '@fortawesome/free-solid-svg-icons'
+import { faBars, faSun, faMoon, faGrip, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { LoginService } from '../../services/login.service';
 import { DarkModeService } from '../../services/dark-mode.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -36,6 +36,8 @@ export class LoginComponent implements OnInit {
   faSun = faSun;
   faMoon = faMoon;
   faGrip = faGrip;
+  faEye = faEye;
+  faEyeSlash = faEyeSlash;
 
   public datosUser = signal<User | null>(null);
 
