@@ -25,7 +25,7 @@ import { ToastService } from 'src/app/services/toast.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent implements OnInit {
+export default class LoginComponent implements OnInit {
 
 
 

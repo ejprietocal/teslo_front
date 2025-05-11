@@ -20,19 +20,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideHttpClient(),
     provideAnimationsAsync(),
-    provideClientHydration(withEventReplay()),
-    // providePrimeNG({
-    //   theme: {
-    //       preset: Aura,
-    //       options:{
-    //         cssLayer: {
-    //           name: 'primeng',
-    //           order: 'theme, base ,primeng, utilities'
-    //         },
-    //         darkModeSelector: '.dark'
-    //       }
-    //   }
-    // }),
+    // provideClientHydration(withEventReplay()),
     { provide: RECAPTCHA_V3_SITE_KEY, useValue: environment.CLAVE_SITIO_WEB_RECAPTCHA}
   ],
 };

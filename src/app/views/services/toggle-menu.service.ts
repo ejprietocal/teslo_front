@@ -4,7 +4,7 @@ import { Injectable, signal } from '@angular/core';
   providedIn: 'root'
 })
 export class ToggleMenuService {
-  visible = signal(false);
+  visible = signal(true);
   floatMenuVisibility = signal(false);
 
   open() {

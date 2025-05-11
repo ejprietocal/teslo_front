@@ -2,7 +2,7 @@
   <button  class="cursor-pointer absolute top-2 right-2" (click)="darkModeService.toggleDarkMode()">
     <fa-icon [icon]="darkModeService.darkMode() ? faSun : faMoon"></fa-icon>
   </button>
-  <div class="w-full h-screen max-w-5xl grid grid-cols-1 md:grid-cols-2 items-center justify-center md:h-fit overflow-hidden bg-color md:rounded-2xl shadow-xl">
+  <div class="w-full h-screen max-w-5xl min-h-[50vh] grid grid-cols-1 md:grid-cols-2 items-center justify-center md:h-fit overflow-hidden bg-color md:rounded-2xl shadow-xl">
     <div class="bg-color shadow-xl bg-color-custom absolute items-center justify-center text-center top-0 left-0 h-[15rem] w-full md:relative flex md:w-full rounded-b-[5rem] md:rounded-bl-none md:h-full md:rounded-r-[15rem]">
       <div class="flex flex-col items-center gap-5">
         <h2 class="font-bold text-4xl">Bienvenido!</h2>
@@ -12,8 +12,8 @@
       </div>
     </div>
     <div class="rounded-2xl pt-[15rem] md:pt-0 p-7 md:pb-10 w-full">
-      <form  [formGroup]="form" (ngSubmit)="onSubmitLogin()">
-        <h3 class="font-bold text-center uppercase p-5 text-2xl">Ingreso</h3>
+      <form  [formGroup]="form" (ngSubmit)="onSubmitLogin()" class="flex flex-col justify-center">
+        <h2 class="h2 mb-5 text-center">Ingreso</h2>
         <label for="email" class="label-behavior">Correo</label>
         <div class="mb-10 relative">
            <input

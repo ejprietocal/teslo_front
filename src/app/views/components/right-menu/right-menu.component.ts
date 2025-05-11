@@ -2,8 +2,8 @@ import { Component, inject } from '@angular/core';
 import { ToggleMenuService } from '../../services/toggle-menu.service';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faXmark, faWebAwesome,faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
-import { Router } from '@angular/router';
+import { faXmark, faWebAwesome,faRightFromBracket, faUser, faCubesStacked, faChevronRight ,faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ScreenSizeService } from 'src/app/services/screen-size.service';
 
 
@@ -13,6 +13,8 @@ import { ScreenSizeService } from 'src/app/services/screen-size.service';
   imports: [
     CommonModule,
     FontAwesomeModule,
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './right-menu.component.html',
   styleUrl: './right-menu.component.css'
@@ -20,15 +22,18 @@ import { ScreenSizeService } from 'src/app/services/screen-size.service';
 export class RightMenuComponent {
 
   readonly drawerService = inject(ToggleMenuService);
-  private readonly router = inject(Router);
+  readonly router = inject(Router);
 
   readonly screenSizeService = inject(ScreenSizeService);
-
+  isInventaryOpen = false;
 
   faXmark = faXmark;
   faWebAwesome = faWebAwesome;
   faRightFromBracket = faRightFromBracket;
   faUser = faUser;
+  faCubesStacked = faCubesStacked;
+  faChevronRight = faChevronRight;
+  faChevronDown = faChevronDown;
 
   logout() {
     localStorage.removeItem('auth_token');
