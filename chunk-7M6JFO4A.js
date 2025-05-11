@@ -1,0 +1,1 @@
+import{Sa as n,ib as s,jb as c,xb as p}from"./chunk-3MG243OD.js";var t=class o{constructor(){console.log("en el products")}static \u0275fac=function(e){return new(e||o)};static \u0275cmp=n({type:o,selectors:[["app-products"]],decls:2,vars:0,template:function(e,a){e&1&&(s(0,"p"),p(1,"products works!"),c())},encapsulation:2})};export{t as default};
