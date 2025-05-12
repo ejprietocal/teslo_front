@@ -4,6 +4,7 @@ import { RefreshTokenService } from '../../services/refresh-token.service';
 import { RightMenuComponent } from '../right-menu/right-menu.component';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,15 +20,21 @@ export default class DashboardComponent {
 
   private readonly router = inject(Router);
   private readonly refreshToken = inject(RefreshTokenService);
+  private routerSubscription!: Subscription;
 
   ngOnInit(): void {
     this.refreshToken.checkToken();
 
-    this.router.events
+    this.routerSubscription = this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
         this.refreshToken.checkToken();
       });
+  }
+  ngOnDestroy(): void {
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+    }
   }
 
 }
