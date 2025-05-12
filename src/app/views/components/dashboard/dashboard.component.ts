@@ -5,6 +5,7 @@ import { RightMenuComponent } from '../right-menu/right-menu.component';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { BreadCumbComponent } from '../bread-cumb/bread-cumb.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +13,7 @@ import { Subscription } from 'rxjs';
     RightMenuComponent,
     TopMenuComponent,
     RouterOutlet,
+    BreadCumbComponent,
 ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'

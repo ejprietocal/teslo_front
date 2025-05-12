@@ -1,25 +1,11 @@
-const { writeFileSync, mkdirSync } = require('fs');
+const { writeFileSync, mkdirSync, readFileSync, existsSync } = require('fs');
 const dotenv = require('dotenv');
 
-// Rutas de los archivos de configuración
-const targetPathProd = './src/environments/environment.ts';
-const targetPathDev = './src/environments/environment.development.ts';
+const envDir = './src/environments';
+mkdirSync(envDir, { recursive: true });
 
-// Crear el directorio de los archivos de entorno si no existe
-mkdirSync('./src/environments', { recursive: true });
-
-// Función para cargar variables y generar el archivo
-function createEnvFile(envPath, targetPath) {
-  const result = dotenv.config({ path: envPath });
-
-  if (result.error) {
-    throw new Error(`No se pudo cargar ${envPath}`);
-  }
-
-  const env = result.parsed;
-
-  // Verificar que las variables obligatorias estén presentes
-  const requiredVars = [
+function generateEnvFile(env, outputPath) {
+  const requiredKeys = [
     'URL_LOGIN_LOCAL',
     'URL_LOGIN',
     'URL_REGISTER',
@@ -28,14 +14,16 @@ function createEnvFile(envPath, targetPath) {
     'CLAVE_SITIO_WEB_RECAPTCHA',
     'URL_RETRIEVE_ACCOUNT',
     'URL_RESET_PASSWORD',
+    // add new varable here
   ];
 
-  const missing = requiredVars.filter((v) => !env[v]);
-  if (missing.length > 0) {
-    throw new Error(`Faltan variables en ${envPath}: ${missing.join(', ')}`);
+  for (const key of requiredKeys) {
+    if (!env[key]) {
+      throw new Error(`Falta la variable ${key} para generar ${outputPath}`);
+    }
   }
 
-  const envContent = `
+  const content = `
 export const environment = {
   URL_LOGIN_LOCAL: '${env.URL_LOGIN_LOCAL}',
   URL_LOGIN: '${env.URL_LOGIN}',
@@ -45,12 +33,28 @@ export const environment = {
   CLAVE_SITIO_WEB_RECAPTCHA: '${env.CLAVE_SITIO_WEB_RECAPTCHA}',
   URL_RETRIEVE_ACCOUNT: '${env.URL_RETRIEVE_ACCOUNT}',
   URL_RESET_PASSWORD: '${env.URL_RESET_PASSWORD}',
+  // add new varable here
 };
 `;
 
-  writeFileSync(targetPath, envContent.trim());
+  writeFileSync(outputPath, content);
+  console.log(`✔️  Archivo generado: ${outputPath}`);
 }
 
-// Generar ambos archivos
-createEnvFile('.env', targetPathDev);
-createEnvFile('.env.prod', targetPathProd);
+try {
+  // GitHub Actions usa process.env
+  if (process.env.CI) {
+    console.log('🚀 Ejecutando en GitHub Actions');
+    generateEnvFile(process.env, `${envDir}/environment.ts`);
+  } else {
+    console.log('🛠️ Ejecutando en local');
+    const devEnv = dotenv.parse(readFileSync('.env'));
+    const prodEnv = existsSync('.env.prod') ? dotenv.parse(readFileSync('.env.prod')) : devEnv;
+
+    generateEnvFile(devEnv, `${envDir}/environment.development.ts`);
+    generateEnvFile(prodEnv, `${envDir}/environment.ts`);
+  }
+} catch (err) {
+  console.error('❌ Error generando archivos de entorno:', err.message);
+  process.exit(1);
+}
