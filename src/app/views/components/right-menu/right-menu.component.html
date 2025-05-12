@@ -1,40 +1,48 @@
 <div class="h-full z-50 transition-all flex items-start overflow-hidden" [ngClass]="{ 'pl-0 pr-0 opacity-0 md:opacity-100': !drawerService.visible(), 'opacity-100': drawerService.visible() }">
   <div [style.height.px]="this.screenSizeService.screenHeight()"  class="pl-2 pr-2 duration-200 text-md fixed overflow-hidden bg-color" [ngClass]="{'md:relative!  w-70' : drawerService.visible(), 'w-0 md:relative md:w-16' : !drawerService.visible()}">
     <span class="flex items-center p-3 justify-between duration-200"  [ngClass]="{'justify-center': !drawerService.visible()}">
-      <fa-icon class="cursor-pointer" [icon]="faWebAwesome" [routerLink]="['/dashboard']"></fa-icon>
-      <fa-icon
-        class="cursor-pointer sm:hidden"
-        [icon]="faXmark"
+      <span class="cursor-pointer fa-solid fa-web-awesome p-1"  (click)="router.navigate(['/dashboard'])"></span>
+      <span
+        class="fa-solid fa-xmark cursor-pointer sm:hidden!"
+
         (click)="drawerService.close()"
         [ngClass]="{ 'hidden': !drawerService.visible() }">
-      </fa-icon>
+      </span>
     </span>
 
     <div class="container-menu-right flex flex-col h-[92%] overflow-hidden  justify-between">
       <div class="scrollbar-class h-full  mb-1 overflow-y-auto flex flex-col gap-1 items-center justify-start">
-        <div class="submenu w-full">
-          <button (click)="isInventaryOpen = !isInventaryOpen" class="flex items-center  bg-module-menu" [ngClass]="{'justify-center': !drawerService.visible()}">
-            <fa-icon class="p-2"  [icon]="faCubesStacked"></fa-icon>
-            <span class="p-2.5 cursor-pointer truncate overflow-hidden whitespace-nowrap"  [ngClass]="{'md:hidden' : !drawerService.visible()}">Inventario</span>
-            <fa-icon [icon]="!isInventaryOpen ? faChevronRight : faChevronDown" class="p-2.5 me-0 ms-auto cursor-pointer truncate overflow-hidden whitespace-nowrap"  [ngClass]="{'md:hidden' : !drawerService.visible()}"></fa-icon>
-          </button>
-          <ul class="bg-slate-200 dark:bg-slate-500 dark:text-slate-200 text-slate-600 text-sm  w-full"   [ngClass]="{
-              'max-h-0 overflow-hidden transition-all duration-300 ease-in-out': !isInventaryOpen || !drawerService.visible(),
-              'max-h-96 transition-all duration-300 ease-in-out': isInventaryOpen && drawerService.visible()
+        @for (item of menuItems; track $index) {
+          <div class="submenu w-full">
+            <button (click)="toggleSubmenu($index)" class="flex p-2 items-center bg-module-menu" [ngClass]="{'justify-start': !drawerService.visible()}">
+              <span class="{{item.icon}} pe-2 pt-2 pb-2 min-w-10"></span>
+              <span class="cursor-pointer truncate overflow-hidden whitespace-nowrap" [ngClass]="{'md:hidden' : !drawerService.visible()}">{{item.name}}</span>
+              <fa-icon
+                [icon]="!submenuOpen()[$index] ? faChevronRight : faChevronDown"
+                class=" me-0 ms-auto cursor-pointer truncate overflow-hidden whitespace-nowrap"
+                [ngClass]="{'md:hidden' : !drawerService.visible()}">
+              </fa-icon>
+            </button>
+
+            <ul class="bg-slate-200 dark:bg-slate-500 dark:text-slate-200 text-slate-600 text-sm w-full" [ngClass]="{
+              'max-h-0 overflow-hidden transition-all duration-300 ease-in-out': !submenuOpen()[$index] || !drawerService.visible(),
+              'max-h-96 transition-all duration-300 ease-in-out': submenuOpen()[$index] && drawerService.visible()
             }">
-            <li class="bg-module-submenu-item" [routerLink]="['products']" [routerLinkActive]="['active']">Productos</li>
-            <li class="bg-module-submenu-item" [routerLink]="['warehouse']" [routerLinkActive]="['active']">Inventario en bodega</li>
-            <li class="bg-module-submenu-item" [routerLink]="['supplies']" [routerLinkActive]="['active']">Suministros</li>
-          </ul>
-        </div>
+              @for (submenu of item.subMenus; track $index) {
+                <li class="bg-module-submenu-item" [routerLink]="submenu.link" [routerLinkActive]="['active']">{{submenu.name}}</li>
+              }
+            </ul>
+          </div>
+        }
+
       </div>
       <div class="w-full flex flex-col gap-1">
         <button pTooltip="Gestión de cuenta" class="flex md:hidden items-center p-1 bg-color-button-right-menu" [ngClass]="{'justify-center': !drawerService.visible()}">
-          <fa-icon class="p-2"  [icon]="faUser"></fa-icon>
+          <span class="p-2 fa-solid fa-user"></span>
           <span class="p-2.5 cursor-pointer truncate overflow-hidden whitespace-nowrap"  [ngClass]="{'md:hidden' : !drawerService.visible()}">Gestión de cuenta</span>
         </button>
         <button  class="flex items-center p-1 bg-color-button-right-menu" (click)="logout()" [ngClass]="{'justify-center': !drawerService.visible()}">
-          <fa-icon class="p-2"  [icon]="faRightFromBracket"></fa-icon>
+          <span class="p-2 fa-solid fa-right-from-bracket"></span>
           <span class="p-2.5 cursor-pointer truncate overflow-hidden whitespace-nowrap"  [ngClass]="{'md:hidden' : !drawerService.visible()}">Cerrar Sesión</span>
         </button>
       </div>

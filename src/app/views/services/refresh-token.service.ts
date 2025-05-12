@@ -34,7 +34,7 @@ export class RefreshTokenService {
           if (res.token) {
             this.datosUser.set(res);
             localStorage.setItem('auth_token', res.token);
-
+            // console.log(res.token);
             // Evitar redirigir al dashboard si ya estás en alguna ruta dentro de dashboard
             if (this.router.url !== '/dashboard' && !this.router.url.startsWith('/dashboard')) {
               this.router.navigate(['/dashboard']);

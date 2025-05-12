@@ -27,6 +27,14 @@ export const routes: Routes = [
       {
         path: 'warehouse',
         loadComponent: () => import('./views/components/warehouse/warehouse.component')
+      },
+      {
+        path: 'account',
+        loadComponent: () => import('./views/components/account/account.component')
+      },
+      {
+        path: 'users',
+        loadComponent: () => import('./views/components/users/users.component')
       }
     ],
   },

@@ -7,8 +7,4 @@ import { Component } from '@angular/core';
   styleUrl: './products.component.css'
 })
 export default class ProductsComponent {
-
-  constructor() {
-    console.log('en el products');
-   }
 }
