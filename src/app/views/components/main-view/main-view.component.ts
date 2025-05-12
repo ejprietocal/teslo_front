@@ -1,26 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { TopMenuComponent } from '../top-menu/top-menu.component';
-import { TopCardComponent } from '../top-card/top-card.component';
 import { ItemCardTop } from 'src/app/interfaces/item-card-top';
-import { GraphicComponent } from '../graphic/graphic.component';
 import { Graphic } from 'src/app/interfaces/graphic';
+import { TopCardComponent } from '../top-card/top-card.component';
+import { GraphicComponent } from '../graphic/graphic.component';
 
 @Component({
-  selector: 'app-content-internal',
+  selector: 'app-main-view',
   imports: [
-    TopMenuComponent,
     TopCardComponent,
     GraphicComponent
   ],
-  templateUrl: './content-internal.component.html',
-  styleUrl: './content-internal.component.css'
+  templateUrl: './main-view.component.html',
+  styleUrl: './main-view.component.css'
 })
-export class ContentInternalComponent implements OnInit {
-
+export default class MainViewComponent implements OnInit {
   items: ItemCardTop[] = [];
   graphic: Graphic[] = [];
 
-  ngOnInit(): void {
+ ngOnInit(): void {
     this.items = [
       {
         title: 'Ingreso hoy',

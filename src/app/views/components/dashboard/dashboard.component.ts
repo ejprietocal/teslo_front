@@ -1,24 +1,40 @@
 import { Component, inject } from '@angular/core';
-import { ContentComponent } from '../content/content.component';
 import { TopMenuComponent } from "../top-menu/top-menu.component";
-import { ToggleMenuService } from '../../services/toggle-menu.service';
 import { RefreshTokenService } from '../../services/refresh-token.service';
+import { RightMenuComponent } from '../right-menu/right-menu.component';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
   imports: [
-    ContentComponent,
+    RightMenuComponent,
+    TopMenuComponent,
+    RouterOutlet,
 ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent {
-  private readonly refreshToken = inject(RefreshTokenService);
+export default class DashboardComponent {
 
-  constructor() { }
+  private readonly router = inject(Router);
+  private readonly refreshToken = inject(RefreshTokenService);
+  private routerSubscription!: Subscription;
 
   ngOnInit(): void {
     this.refreshToken.checkToken();
+
+    this.routerSubscription = this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.refreshToken.checkToken();
+      });
+  }
+  ngOnDestroy(): void {
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+    }
   }
 
 }

@@ -13,7 +13,14 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-
+.h1{
+  @apply
+  mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white
+}
+.h2{
+  @apply
+  text-4xl font-extrabold dark:text-white
+}
 .bg-color{
   @apply
   dark:bg-slate-900
@@ -23,11 +30,19 @@
   text-stone-900
 
   transition-all
-
   duration-200
-
 }
+.bg-color-secondary{
+@apply
+  backdrop-blur-sm
+  bg-zinc-300/30
+  text-stone-900
+  dark:bg-slate-900/50
+  dark:text-stone-200;
+}
+
 .scrollbar-class{
+
   @apply
   scrollbar-thin scrollbar-thumb-gray-400 scrollbar-thumb-rounded-full scrollbar-track-transparent scrollbar-track-rounded-full overflow-auto
 }
@@ -42,6 +57,8 @@
   @apply bg-gradient-to-br from-slate-400 to-neutral-400
   dark:bg-gradient-to-br dark:from-slate-400 dark:to-gray-700
   duration-200
+dark:text-stone-200
+  text-stone-900
 }
 .bg-color-side {
   @apply bg-green-200 dark:bg-green-900 duration-200;
@@ -79,7 +96,7 @@
 .bg-color-button-right-menu{
   @apply
   hover:cursor-pointer
-  rounded-xl
+  rounded-sm
   duration-200
 
   text-sm
@@ -97,21 +114,45 @@
   hover:bg-slate-800
   hover:text-white
 }
+.bg-module-menu{
+  @apply
+  hover:cursor-pointer
+  rounded-sm
+  duration-200
+  font-extrabold
+
+  text-lg
+
+  w-full
+
+  dark:text-stone-200
+  dark:bg-slate-700
+  bg-slate-400
+  text-stone-900
+
+  hover:dark:bg-slate-400
+  hover:dark:text-white
+
+  hover:bg-slate-400
+  hover:text-white
+}
+.bg-module-submenu-item{
+  @apply
+  font-bold p-3 cursor-pointer hover:bg-slate-500 hover:text-slate-100 dark:hover:bg-slate-300 dark:hover:text-slate-600 border-2 border-transparent
+}
+
+.active{
+  @apply
+  bg-slate-400 text-slate-100 dark:bg-slate-700 dark:text-slate-100 font-extrabold border-2 border-slate-700 dark:border-white
+}
+
 .input-behavior{
   @apply
-  outline-2
-  hover:outline-stone-500
-  dark:hover:outline-stone-100
-  duration-200
-  outline-stone-200
-  dark:outline-stone-500
-  text-stone-800
-   dark:text-stone-100
-   rounded-xl
-   w-full
-   p-2
-   bg-stone-50
-   dark:bg-stone-800
+bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white! dark:focus:ring-blue-500 dark:focus:border-blue-500
+}
+.label-behavior{
+  @apply
+  block mb-2 text-sm font-medium
 }
 .button-behavior{
   @apply
