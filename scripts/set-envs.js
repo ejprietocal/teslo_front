@@ -14,6 +14,7 @@ function generateEnvFile(env, outputPath) {
     'CLAVE_SITIO_WEB_RECAPTCHA',
     'URL_RETRIEVE_ACCOUNT',
     'URL_RESET_PASSWORD',
+    // add new varable here
   ];
 
   for (const key of requiredKeys) {
@@ -32,6 +33,7 @@ export const environment = {
   CLAVE_SITIO_WEB_RECAPTCHA: '${env.CLAVE_SITIO_WEB_RECAPTCHA}',
   URL_RETRIEVE_ACCOUNT: '${env.URL_RETRIEVE_ACCOUNT}',
   URL_RESET_PASSWORD: '${env.URL_RESET_PASSWORD}',
+  // add new varable here
 };
 `;
 
