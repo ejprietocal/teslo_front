@@ -1,0 +1,1 @@
+import{Sa as n,jb as s,kb as p,yb as c}from"./chunk-5MEIZERQ.js";var t=class o{static \u0275fac=function(e){return new(e||o)};static \u0275cmp=n({type:o,selectors:[["app-products"]],decls:2,vars:0,template:function(e,a){e&1&&(s(0,"p"),c(1,"products works!"),p())},encapsulation:2})};export{t as default};
