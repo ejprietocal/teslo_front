@@ -32,8 +32,8 @@ export const environment = {
 mkdirSync('./src/environments', { recursive: true });
 
 // Escribir el archivo de entorno principal según el tipo de entorno
-if (process.env.NODE_ENV === 'production') {
+
   writeFileSync(targetPath, envContent);
-} else {
+
   writeFileSync(targetPathDev, envContent);
-}
+
