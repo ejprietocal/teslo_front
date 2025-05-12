@@ -1,24 +1,22 @@
 const { writeFileSync, mkdirSync } = require('fs');
 const dotenv = require('dotenv');
 
-// Rutas de los archivos de configuración
-const targetPathProd = './src/environments/environment.ts';
-const targetPathDev = './src/environments/environment.development.ts';
+// Rutas destino
+const envDir = './src/environments';
+const devPath = `${envDir}/environment.development.ts`;
+const prodPath = `${envDir}/environment.ts`;
 
-// Crear el directorio de los archivos de entorno si no existe
-mkdirSync('./src/environments', { recursive: true });
+// Crear carpeta si no existe
+mkdirSync(envDir, { recursive: true });
 
-// Función para cargar variables y generar el archivo
-function createEnvFile(envPath, targetPath) {
-  const result = dotenv.config({ path: envPath });
+// Función para cargar y escribir un environment
+function generateEnv(envFile, targetPath) {
+  const envConfig = dotenv.config({ path: envFile }).parsed;
 
-  if (result.error) {
-    throw new Error(`No se pudo cargar ${envPath}`);
+  if (!envConfig) {
+    throw new Error(`No se pudo cargar el archivo ${envFile}`);
   }
 
-  const env = result.parsed;
-
-  // Verificar que las variables obligatorias estén presentes
   const requiredVars = [
     'URL_LOGIN_LOCAL',
     'URL_LOGIN',
@@ -30,27 +28,28 @@ function createEnvFile(envPath, targetPath) {
     'URL_RESET_PASSWORD',
   ];
 
-  const missing = requiredVars.filter((v) => !env[v]);
-  if (missing.length > 0) {
-    throw new Error(`Faltan variables en ${envPath}: ${missing.join(', ')}`);
+  for (const key of requiredVars) {
+    if (!envConfig[key]) {
+      throw new Error(`Falta la variable ${key} en ${envFile}`);
+    }
   }
 
-  const envContent = `
-export const environment = {
-  URL_LOGIN_LOCAL: '${env.URL_LOGIN_LOCAL}',
-  URL_LOGIN: '${env.URL_LOGIN}',
-  URL_REGISTER: '${env.URL_REGISTER}',
-  URL_CHECK_TOKEN: '${env.URL_CHECK_TOKEN}',
-  URL_BUSINESS_TYPES: '${env.URL_BUSINESS_TYPES}',
-  CLAVE_SITIO_WEB_RECAPTCHA: '${env.CLAVE_SITIO_WEB_RECAPTCHA}',
-  URL_RETRIEVE_ACCOUNT: '${env.URL_RETRIEVE_ACCOUNT}',
-  URL_RESET_PASSWORD: '${env.URL_RESET_PASSWORD}',
+  const content = `export const environment = {
+  URL_LOGIN_LOCAL: '${envConfig.URL_LOGIN_LOCAL}',
+  URL_LOGIN: '${envConfig.URL_LOGIN}',
+  URL_REGISTER: '${envConfig.URL_REGISTER}',
+  URL_CHECK_TOKEN: '${envConfig.URL_CHECK_TOKEN}',
+  URL_BUSINESS_TYPES: '${envConfig.URL_BUSINESS_TYPES}',
+  CLAVE_SITIO_WEB_RECAPTCHA: '${envConfig.CLAVE_SITIO_WEB_RECAPTCHA}',
+  URL_RETRIEVE_ACCOUNT: '${envConfig.URL_RETRIEVE_ACCOUNT}',
+  URL_RESET_PASSWORD: '${envConfig.URL_RESET_PASSWORD}',
 };
 `;
 
-  writeFileSync(targetPath, envContent.trim());
+  writeFileSync(targetPath, content);
+  console.log(`✅ Archivo generado: ${targetPath}`);
 }
 
-// Generar ambos archivos
-createEnvFile('.env', targetPathDev);
-createEnvFile('.env.prod', targetPathProd);
+// Generar ambos
+generateEnv('.env', devPath);
+generateEnv('.env.prod', prodPath);
