@@ -28,15 +28,16 @@ export default class DashboardComponent {
     this.refreshToken.checkToken();
 
     this.routerSubscription = this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(() => {
-        this.refreshToken.checkToken();
-      });
+    .pipe(filter(event => event instanceof NavigationEnd))
+    .subscribe(() => {
+      this.refreshToken.checkToken();
+    });
   }
   ngOnDestroy(): void {
     if (this.routerSubscription) {
       this.routerSubscription.unsubscribe();
     }
   }
+
 
 }

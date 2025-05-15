@@ -14,22 +14,51 @@
       <div class="scrollbar-class h-full  mb-1 overflow-y-auto flex flex-col gap-1 items-center justify-start">
         @for (item of menuItems; track $index) {
           <div class="submenu w-full">
-            <button (click)="toggleSubmenu($index)" class="flex p-2 items-center bg-module-menu" [ngClass]="{'justify-start': !drawerService.visible()}">
-              <span class="{{item.icon}} pe-2 pt-2 pb-2 min-w-10"></span>
-              <span class="cursor-pointer truncate overflow-hidden whitespace-nowrap" [ngClass]="{'md:hidden' : !drawerService.visible()}">{{item.name}}</span>
+            <button
+              [attr.data-collapse-toggle]="'submenu' + $index"
+              type="button"
+              class="flex p-2 items-center bg-module-menu"
+              [ngClass]="{ 'justify-start': !drawerService.visible() }">
+              <span class="{{ item.icon }} pe-2 pt-2 pb-2 min-w-10"></span>
+              <span class="truncate" [ngClass]="{ 'md:hidden': !drawerService.visible() }">{{ item.name }}</span>
               <fa-icon
-                [icon]="!submenuOpen()[$index] ? faChevronRight : faChevronDown"
+                [icon]="faChevronDown"
                 class=" me-0 ms-auto cursor-pointer truncate overflow-hidden whitespace-nowrap"
                 [ngClass]="{'md:hidden' : !drawerService.visible()}">
               </fa-icon>
             </button>
 
-            <ul class="bg-slate-200 dark:bg-slate-500 dark:text-slate-200 text-slate-600 text-sm w-full" [ngClass]="{
-              'max-h-0 overflow-hidden transition-all duration-300 ease-in-out': !submenuOpen()[$index] || !drawerService.visible(),
-              'max-h-96 transition-all duration-300 ease-in-out': submenuOpen()[$index] && drawerService.visible()
-            }">
+            <ul
+              [id]="'submenu' + $index"
+              class="bg-slate-200 dark:bg-slate-500 text-sm w-full"
+              [ngClass]="{ 'hidden': !drawerService.visible() }">
+
               @for (submenu of item.subMenus; track $index) {
-                <li class="bg-module-submenu-item" [routerLink]="submenu.link" [routerLinkActive]="['active']">{{submenu.name}}</li>
+                @if (submenu.subMenus) {
+                  <div class="bg-slate-300 dark:bg-slate-600 pb-1 mb-2">
+                    <button
+                      [attr.data-collapse-toggle]="'subsubmenu' + $index + '-' + $index"
+                      type="button"
+                      class="flex p-2 w-full bg-module-submenu-item"
+                      [ngClass]="{ 'justify-start': !drawerService.visible() }">
+                      {{ submenu.name | titlecase }}
+                      <fa-icon [icon]="faChevronDown" class="ms-auto" />
+                    </button>
+
+                    <ul [id]="'subsubmenu' + $index + '-' + $index" class="hidden">
+                      @for (child of submenu.subMenus; track $index) {
+                        <li class="bg-module-subsubmenu-item" [routerLink]="child.link" [routerLinkActive]="['activeSub']">
+                          <span [ngClass]="child.icon"></span> {{ child.name | titlecase }}
+                        </li>
+                      }
+                    </ul>
+                  </div>
+                }
+                @else {
+                  <li class="bg-module-submenu-item" [routerLink]="submenu.link" [routerLinkActive]="['active']">
+                    {{ submenu.name | titlecase }}
+                  </li>
+                }
               }
             </ul>
           </div>
@@ -49,3 +78,5 @@
     </div>
   </div>
 </div>
+
+
