@@ -54,7 +54,7 @@
 
 }
 .bg-color-general{
-  @apply bg-gradient-to-br from-slate-400 to-neutral-400
+  @apply bg-gradient-to-br from-slate-300 to-neutral-200
   dark:bg-gradient-to-br dark:from-slate-400 dark:to-gray-700
   duration-200
 dark:text-stone-200
