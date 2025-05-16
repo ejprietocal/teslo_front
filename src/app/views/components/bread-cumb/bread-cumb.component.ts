@@ -8,14 +8,14 @@ import { filter } from 'rxjs/operators';
   selector: 'app-bread-cumb',
   imports: [
     RouterLink,
-    RouterLinkActive,
     CommonModule
   ],
   templateUrl: './bread-cumb.component.html',
   styleUrl: './bread-cumb.component.css'
 })
 export class BreadCumbComponent {
-  breadcrumb: string[] = [];
+  breadcrumb: { label: string, url: string }[] = [];
+
 
   router = inject(Router);
   activatedRoute = inject(ActivatedRoute);
@@ -32,7 +32,6 @@ export class BreadCumbComponent {
         this.createBreadcrumb(this.activatedRoute.root);
         console.log(this.breadcrumb);
       });
-
   }
 
   ngOnDestroy(): void {
@@ -41,20 +40,22 @@ export class BreadCumbComponent {
     }
   }
 
-  createBreadcrumb(route: ActivatedRoute, url: string = '') {
-    const children: ActivatedRoute[] = route.children;
+ createBreadcrumb(route: ActivatedRoute, url: string = '') {
+  const children: ActivatedRoute[] = route.children;
 
+  if (children.length === 0) return;
 
-    if (children.length === 0) {
-      return;
-    }
-
-    for (const child of children) {
-      const routeURL: string = child.snapshot.url.map(segment => segment.path).join('/');
+  for (const child of children) {
+    const routeURL: string = child.snapshot.url.map(segment => segment.path).join('/');
+    if (routeURL !== '') {
       const nextUrl = `${url}/${routeURL}`;
-
-      this.breadcrumb.push(routeURL);
+      this.breadcrumb.push({
+        label: routeURL,
+        url: nextUrl
+      });
       this.createBreadcrumb(child, nextUrl);
     }
   }
+}
+
 }

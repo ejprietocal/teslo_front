@@ -5,23 +5,16 @@
         @if ($index === 0) {
           <div class="bg-module-breadcrumb-item">
             <span class="fa-solid fa-house-chimney-crack fa-fw mr-1"></span>
-            <a [routerLink]="['/',item]"class="">
-              {{item | titlecase}}
+            <a [routerLink]="item.url">
+              {{item.label | titlecase}}
             </a>
           </div>
         }
         @else {
-          @if (breadcrumb.length === 2 && breadcrumb[1] === '') {
-            <a [routerLink]="item"  class="bg-module-breadcrumb-item">
-              {{item | titlecase}}
-            </a>
-          }
-          @else {
-            <span class="fa-solid fa-chevron-right"></span>
-            <a [routerLink]="item"class="bg-module-breadcrumb-item">
-              {{item | titlecase}}
-            </a>
-          }
+          <span class="fa-solid fa-chevron-right mx-2"></span>
+          <a [routerLink]="item.url" class="bg-module-breadcrumb-item">
+            {{item.label | titlecase}}
+          </a>
         }
       </li>
     }

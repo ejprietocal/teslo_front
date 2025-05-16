@@ -1,17 +1,10 @@
-
-import { CommonModule } from '@angular/common';
-import { Component, inject, Signal, signal } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-products',
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-
-    FontAwesomeModule,
+    RouterOutlet
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'

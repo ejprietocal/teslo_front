@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, inject, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, inject, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TopMenuComponent } from './views/components/top-menu/top-menu.component';
 import { CommonModule } from '@angular/common';
@@ -20,13 +20,13 @@ import { ToastComponent } from './components/toast/toast.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent  implements OnInit {
+export class AppComponent  implements AfterViewChecked {
 
   public readonly loaderService = inject(ActivateLoaderService);
   public readonly darkModeService = inject(DarkModeService);
   title = 'teslo_front';
 
-  ngOnInit(): void {
+  ngAfterViewChecked(): void {
     initFlowbite();
   }
 
