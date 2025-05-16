@@ -1,0 +1,32 @@
+<div id="createCategory" tabindex="-1" class="absolute flex top-0 left-0 backdrop-blur-xs w-full items-start pt-15 h-full z-49">
+  <div class="w-sm md:w-md lg:w-lg h-fit bg-color rounded-xl p-5 relative animate-fadeIn">
+    <span class="fa-solid fa-close absolute right-3 top-3 cursor-pointer text-xl" data-modal-hide="createCategory" aria-hidden="true"></span>
+    <h4 class="h4 mb-2"><span class="fa fa-plus"></span> Nueva categoría</h4>
+    <hr>
+    <form action="" class="mt-5">
+      <div class="mb-5 relative">
+        <label for="name" class="label-behavior">Nombre</label>
+        <input
+          type="text"
+          id="name"
+          class="input-behavior"
+          placeholder="Escribe el nombre de la categoría"
+        >
+      </div>
+      <div class="mb-5 relative">
+        <label for="description" class="label-behavior">Descripción</label>
+        <textarea
+          id="description"
+          class="input-behavior"
+          rows="5"
+          placeholder="Escribe la descripción de la categoría"
+        ></textarea>
+      </div>
+      <div class="mb-5 flex justify-between">
+        <button type="button" class="button-cancel" data-modal-hide="createCategory"><span class="fa fa-ban"></span> Cancelar</button>
+        <button class="button-create"><span class="fa fa-check"></span> Crear categoría</button>
+      </div>
+    </form>
+  </div>
+</div>
+

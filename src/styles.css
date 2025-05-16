@@ -4,14 +4,28 @@
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
 
-
+/* scrollbar behavior */
 @plugin 'tailwind-scrollbar' {
   nocompatible: true;
   preferredStrategy: 'pseudoelements';
 }
-
-
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* animations */
+@theme{
+  --animate-fadeIn: fadein .2s ease-in-out;
+  @keyframes fadein {
+    from {
+      opacity: 0;
+      transform: scale(.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+}
 
 .h1{
   @apply
@@ -19,7 +33,15 @@
 }
 .h2{
   @apply
-  text-4xl font-extrabold dark:text-white
+  text-4xl font-extrabold dark:text-white mt-2 mb-2 capitalize
+}
+.h3{
+  @apply
+  text-2xl font-extrabold dark:text-white mt-2 mb-2 capitalize
+}
+.h4{
+  @apply
+  text-xl font-extrabold dark:text-white mt-2 mb-2 capitalize
 }
 .bg-color{
   @apply
@@ -42,7 +64,6 @@
 }
 
 .scrollbar-class{
-
   @apply
   scrollbar-thin scrollbar-thumb-gray-400 scrollbar-thumb-rounded-full scrollbar-track-transparent scrollbar-track-rounded-full overflow-auto
 }
@@ -59,9 +80,6 @@
   duration-200
 dark:text-stone-200
   text-stone-900
-}
-.bg-color-side {
-  @apply bg-green-200 dark:bg-green-900 duration-200;
 }
 .bg-color-container{
   @apply
@@ -196,6 +214,57 @@ bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-bl
   pb-2
   hover:cursor-pointer
 }
+.button-cancel{
+  @apply
+  flex
+  justify-center
+  items-center
+
+  hover:bg-red-700
+  hover:text-stone-100
+  dark:hover:bg-red-500
+  dark:hover:text-white
+  text-red-500
+  text-sm
+  font-extrabold
+  hover:duration-200
+  gap-3
+  border-2
+  border-red-500
+  dark:border-red-500
+  rounded-md
+  pl-5
+  pr-5
+  pt-2
+  pb-2
+  hover:cursor-pointer
+}
+.button-create{
+  @apply
+  flex
+  justify-center
+  items-center
+
+  hover:bg-green-500
+  hover:text-stone-100
+  dark:hover:bg-green-700
+  dark:hover:text-white
+  text-green-700
+  dark:text-green-500
+  text-sm
+  font-extrabold
+  hover:duration-200
+  gap-3
+  border-2
+  border-green-700
+  dark:border-green-500
+  rounded-md
+  pl-5
+  pr-5
+  pt-2
+  pb-2
+  hover:cursor-pointer
+}
 .button-register{
   @apply
   text-stone-300
@@ -209,6 +278,31 @@ bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-bl
    rounded-2xl
    border-2
    border-white
+}
+.button-internal-module{
+  @apply
+  py-2.5
+  px-5
+  mt-2
+  mb-2
+  text-sm
+  font-medium
+  duration-200
+  text-gray-900
+  focus:outline-none
+  bg-zinc-300
+  rounded-md
+  border
+  border-gray-200
+  hover:bg-gray-100
+  hover:text-slate-700
+  dark:focus:ring-gray-700
+  dark:bg-slate-700
+  dark:text-zinc-100
+  dark:border-gray-400
+  dark:hover:text-white
+  dark:hover:bg-slate-900
+  cursor-pointer
 }
 .floating-menu {
   @apply
