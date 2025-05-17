@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ActivateLoaderService } from 'src/app/services/activate-loader.service';
 
 @Component({
   selector: 'app-variants',
@@ -9,4 +10,9 @@ import { Component } from '@angular/core';
 })
 export default class VariantsComponent {
 
+  public readonly loaderService = inject(ActivateLoaderService);
+
+  ngOnInit(): void {
+    this.loaderService.deactivateInternalSignal();
+  }
 }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ActivateLoaderService } from 'src/app/services/activate-loader.service';
 
 @Component({
   selector: 'app-sub-categories',
@@ -8,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export default class SubCategoriesComponent {
 
+  public readonly loaderService = inject(ActivateLoaderService);
+
+
+  ngOnInit(): void {
+    this.loaderService.deactivateInternalSignal();
+  }
 }

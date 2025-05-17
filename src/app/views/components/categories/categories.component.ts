@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CreateCategoryComponent } from './create-category/create-category.component';
+import { ActivateLoaderService } from 'src/app/services/activate-loader.service';
 
 @Component({
   selector: 'app-categories',
@@ -11,4 +12,9 @@ import { CreateCategoryComponent } from './create-category/create-category.compo
 })
 export default class CategoriesComponent {
 
+  public readonly loaderService = inject(ActivateLoaderService);
+
+  ngOnInit(): void {
+    this.loaderService.deactivateInternalSignal();
+  }
 }
