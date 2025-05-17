@@ -7,6 +7,9 @@ import { Subscription } from 'rxjs';
 import { CategoryCreatedResponse } from 'src/app/interfaces/category-created-response';
 import { ActivateLoaderService } from 'src/app/services/activate-loader.service';
 import { CreateCategoryService } from 'src/app/views/services/create-category.service';
+import { jwtDecode } from "jwt-decode";
+import { PayloadUser } from 'src/app/interfaces/payload-user';
+
 
 @Component({
   selector: 'app-create-category',
@@ -32,10 +35,15 @@ export class CreateCategoryComponent {
   form: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
     description: ['', [Validators.required, Validators.minLength(3)]],
+    id_business: ['']
   });
 
   onSubmitCreateCategory() : Subscription {
     this.loaderService.activateInternalSignal();
+
+    const { id_business } = jwtDecode<PayloadUser>(localStorage.getItem('auth_token')!);
+    this.form.get('id_business')?.setValue(id_business);
+
     return this.createCategoryService.createCategory(this.form).subscribe({
        next: (res: CategoryCreatedResponse) => {
          console.log(res);

@@ -13,6 +13,8 @@ import { ActivateLoaderService } from '../../../services/activate-loader.service
 import { Subscription } from 'rxjs';
 import { ToastService } from 'src/app/services/toast.service';
 import { ToastrService } from 'ngx-toastr';
+import { jwtDecode } from "jwt-decode";
+import { PayloadUser } from 'src/app/interfaces/payload-user';
 
 
 @Component({
@@ -72,26 +74,41 @@ export default class LoginComponent implements OnInit {
 
   onSubmitLogin(): Subscription {
     this.activateLoader.activateSignal();
-    return this.recaptchaService.execute('submitLogin').subscribe((token) =>{
+    return this.recaptchaService.execute('submitLogin').subscribe((token) => {
       this.form.get('recaptchaToken')?.setValue(token);
-        this.loginService.login(this.form).subscribe({
-          next: (res) => {
-            this.datosUser.set(res);
-            localStorage.setItem('auth_token', res.token!);
-          },
-          complete: () => {
-            this.router.navigate(['/dashboard']);
+      this.loginService.login(this.form).subscribe({
+        next: (res) => {
+          const decoded = jwtDecode<PayloadUser>(res.token);
+          if (Array.isArray(decoded.id_business) && decoded.id_business.length > 1) {
+            this.router.navigate(['/choose-business']);
             this.activateLoader.deactivateSignal();
-          },
-          error: (err) => {
-            console.error('Error en la solicitud de login:', err);
-            this.activateLoader.deactivateSignal();
-            localStorage.removeItem('auth_token');
-            this.toastr.error(err.error.message);
+          } else {
+            const payload = { email : decoded.email, id_business: Array.isArray(decoded.id_business)? decoded.id_business[0] : decoded.id_business };
+            this.loginService.loginWithBusiness(payload, res.token!).subscribe({
+              next: (res) => {
+                localStorage.setItem('auth_token', res.token!);
+                this.router.navigate(['/dashboard']);
+              },
+              error: (err) => {
+                this.toastr.error('Error al seleccionar el negocio');
+                console.error(err);
+              },
+              complete: () => {
+                this.activateLoader.deactivateSignal();
+              }
+            });
           }
-        });
-    })
+        },
+        error: (err) => {
+          console.error('Error en la solicitud de login:', err);
+          this.activateLoader.deactivateSignal();
+          localStorage.removeItem('auth_token');
+          this.toastr.error(err.error.message);
+        }
+      });
+    });
   }
+
 
   retrieveAccount(): void {
     this.router.navigate(['/retrieve-account']);
