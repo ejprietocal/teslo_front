@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { User } from '../../interfaces/user';
 import { Router } from '@angular/router';
 import { ActivateLoaderService } from '../../services/activate-loader.service';
@@ -11,6 +11,7 @@ import { environment } from '@environments/environment';
 export class RefreshTokenService {
 
   private readonly environments = environment;
+
 
   constructor(
     private http : HttpClient,

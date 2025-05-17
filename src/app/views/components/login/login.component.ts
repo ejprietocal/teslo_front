@@ -12,6 +12,7 @@ import { ReCaptchaV3Service } from 'ng-recaptcha-2';
 import { ActivateLoaderService } from '../../../services/activate-loader.service';
 import { Subscription } from 'rxjs';
 import { ToastService } from 'src/app/services/toast.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -47,6 +48,7 @@ export default class LoginComponent implements OnInit {
   toast = inject(ToastService);
   loginService = inject(LoginService);
   router = inject(Router);
+  toastr = inject(ToastrService);
 
   constructor(
     public readonly darkModeService : DarkModeService,
@@ -85,12 +87,7 @@ export default class LoginComponent implements OnInit {
             console.error('Error en la solicitud de login:', err);
             this.activateLoader.deactivateSignal();
             localStorage.removeItem('auth_token');
-            this.toast.show({
-              message: err.error.message,
-              icon: '',
-              color: 'error',
-              duration: 5000
-            });
+            this.toastr.error(err.error.message);
           }
         });
     })

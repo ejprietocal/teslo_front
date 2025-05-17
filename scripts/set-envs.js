@@ -14,6 +14,14 @@ function generateEnvFile(env, outputPath) {
     'CLAVE_SITIO_WEB_RECAPTCHA',
     'URL_RETRIEVE_ACCOUNT',
     'URL_RESET_PASSWORD',
+
+    //category Endpoints
+    'URL_CREATE_CATEGORY',
+    'URL_GET_CATEGORIES',
+    'URL_GET_CATEGORY',
+    'URL_DELETE_CATEGORY',
+    'URL_UPDATE_CATEGORY',
+
     // add new varable here
   ];
 
@@ -33,6 +41,14 @@ export const environment = {
   CLAVE_SITIO_WEB_RECAPTCHA: '${env.CLAVE_SITIO_WEB_RECAPTCHA}',
   URL_RETRIEVE_ACCOUNT: '${env.URL_RETRIEVE_ACCOUNT}',
   URL_RESET_PASSWORD: '${env.URL_RESET_PASSWORD}',
+
+  //category Endpoints
+  URL_CREATE_CATEGORY: '${env.URL_CREATE_CATEGORY}',
+  URL_GET_CATEGORIES: '${env.URL_GET_CATEGORIES}',
+  URL_GET_CATEGORY: '${env.URL_GET_CATEGORY}',
+  URL_DELETE_CATEGORY: '${env.URL_DELETE_CATEGORY}',
+  URL_UPDATE_CATEGORY: '${env.URL_UPDATE_CATEGORY}',
+
   // add new varable here
 };
 `;
