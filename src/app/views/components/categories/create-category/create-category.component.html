@@ -1,6 +1,6 @@
 <div #createCategory id="createCategory" tabindex="-1" class="absolute hidden flex top-0 left-0 backdrop-blur-xs w-full items-start pt-15 h-full z-10">
   <div class="w-sm md:w-md lg:w-lg h-fit bg-color rounded-xl p-5 relative animate-fadeIn">
-    <span class="fa-solid fa-close absolute right-3 top-3 cursor-pointer text-xl" data-modal-hide="createCategory" aria-hidden="true"></span>
+    <span type="button" class="fa-solid fa-close absolute right-3 top-3 cursor-pointer text-xl" data-modal-hide="createCategory" aria-hidden="true"></span>
     <h4 class="h4 mb-2"><span class="fa fa-plus"></span> Nueva categoría</h4>
     <hr>
     <form [formGroup]="form" (ngSubmit)="onSubmitCreateCategory()" class="mt-5">

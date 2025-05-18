@@ -32,6 +32,7 @@ export class RefreshTokenService {
       }).subscribe({
         next: (res) => {
           this.activateLoader.deactivateSignal();
+          this.activateLoader.deactivateInternalSignal();
           if (res.token) {
             this.datosUser.set(res);
             localStorage.setItem('auth_token', res.token);

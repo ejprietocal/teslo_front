@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { CategoryCreatedResponse } from 'src/app/interfaces/category-created-response';
 import { ActivateLoaderService } from 'src/app/services/activate-loader.service';
-import { CreateCategoryService } from 'src/app/views/services/create-category.service';
+import { CategoryService } from 'src/app/views/services/category.service';
 import { jwtDecode } from "jwt-decode";
 import { PayloadUser } from 'src/app/interfaces/payload-user';
 
@@ -27,7 +27,7 @@ export class CreateCategoryComponent {
   fb = inject(FormBuilder);
   readonly loaderService = inject(ActivateLoaderService);
   private readonly toastr = inject(ToastrService);
-  private readonly createCategoryService = inject(CreateCategoryService);
+  private readonly createCategoryService = inject(CategoryService);
 
   @ViewChild('createCategory') createCategory!: ElementRef<HTMLElement>;
 
@@ -44,9 +44,9 @@ export class CreateCategoryComponent {
     const { id_business } = jwtDecode<PayloadUser>(localStorage.getItem('auth_token')!);
     this.form.get('id_business')?.setValue(id_business);
 
-    return this.createCategoryService.createCategory(this.form).subscribe({
+    return this.createCategoryService.createCategory(this.form,localStorage.getItem('auth_token')!).subscribe({
        next: (res: CategoryCreatedResponse) => {
-         console.log(res);
+
        },
        complete: () => {
          this.createCategory.nativeElement.classList.add('hidden');

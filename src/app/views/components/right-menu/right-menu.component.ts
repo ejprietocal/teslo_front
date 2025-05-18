@@ -81,8 +81,8 @@ export class RightMenuComponent {
   faChevronDown = faChevronDown;
 
   logout() {
-    localStorage.removeItem('auth_token');
     this.router.navigate(['']);
+    localStorage.removeItem('auth_token');
   }
 
 }
