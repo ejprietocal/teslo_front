@@ -1,0 +1,1 @@
+import{a as i}from"./chunk-OQPAJ3EM.js";import{T as a,Ta as o}from"./chunk-H2LR7ZRP.js";var e=class t{loaderService=a(i);ngOnInit(){this.loaderService.deactivateInternalSignal()}static \u0275fac=function(n){return new(n||t)};static \u0275cmp=o({type:t,selectors:[["app-variants"]],decls:0,vars:0,template:function(n,s){},encapsulation:2})};export{e as default};

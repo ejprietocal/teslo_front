@@ -1,1 +1,0 @@
-import{Sa as n,jb as s,kb as a,yb as i}from"./chunk-5MEIZERQ.js";var t=class o{static \u0275fac=function(e){return new(e||o)};static \u0275cmp=n({type:o,selectors:[["app-sub-categories"]],decls:2,vars:0,template:function(e,r){e&1&&(s(0,"p"),i(1,"sub-categories works!"),a())},encapsulation:2})};export{t as default};

@@ -1,1 +1,0 @@
-import{Sa as a}from"./chunk-5MEIZERQ.js";var e=class t{static \u0275fac=function(n){return new(n||t)};static \u0275cmp=a({type:t,selectors:[["app-variants"]],decls:0,vars:0,template:function(n,s){},encapsulation:2})};export{e as default};
