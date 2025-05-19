@@ -30,7 +30,6 @@ export default class DashboardComponent {
   public loaderService = inject(ActivateLoaderService);
 
   ngOnInit(): void {
-    this.loaderService.deactivateInternalSignal();
     this.refreshToken.checkToken();
     this.routerSubscription = this.router.events
     .pipe(filter(event => event instanceof NavigationEnd))

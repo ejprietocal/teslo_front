@@ -3,34 +3,10 @@
   <span class="ml-2">Nueva categoría</span>
 </button>
 
-<app-create-category></app-create-category>
+<app-create-category [categoryCreatedSignal]="categoryCreated"></app-create-category>
 
 
-<table #category class="bg-color" >
-  <!-- <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Descripción</th>
-      <th>Activo</th>
-      <th>Opciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (item of categories; track $index) {
-      <tr>
-        <td>{{item.name}}</td>
-        <td>{{item.description}}</td>
-        <td>{{item.isActive}}</td>
-        <td>
-          <button type="button" class="button-internal-module">
-            <span class="fa-solid fa-pen"></span>
-            <span class="ml-2">Editar</span>
-          </button>
-          <button type="button" class="button-internal-module">
-            <span class="fa-solid fa-trash"></span>
-            <span class="ml-2">Eliminar</span>
-          </button>
-      </tr>
-    }
-  </tbody> -->
-</table>
+<div #categoryWrapper>
+  <table #category>
+  </table>
+</div>

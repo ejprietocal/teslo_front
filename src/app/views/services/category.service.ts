@@ -13,11 +13,11 @@ export class CategoryService {
   private readonly environments  = environment;
   private readonly http = inject(HttpClient)
 
-  createCategory(form: FormGroup, token: string): Observable<any> {
+  createCategory(form: FormGroup): Observable<any> {
     return this.http.post<any>(this.environments.URL_CREATE_CATEGORY, form.value)
   }
 
-  getCategories(token : string) : Observable<Category[]> {
+  getCategories() : Observable<Category[]> {
     return this.http.get<Category[]>(this.environments.URL_GET_CATEGORIES);
   }
 }

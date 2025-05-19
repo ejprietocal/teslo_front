@@ -30,7 +30,6 @@ export class BreadCumbComponent {
       .subscribe(() => {
         this.breadcrumb = [];
         this.createBreadcrumb(this.activatedRoute.root);
-        console.log(this.breadcrumb);
       });
   }
 
