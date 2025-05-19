@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, Input, ViewChild, WritableSignal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { CategoryCreatedResponse } from 'src/app/interfaces/category-created-response';
 import { ActivateLoaderService } from 'src/app/services/activate-loader.service';
-import { CreateCategoryService } from 'src/app/views/services/create-category.service';
+import { CategoryService } from 'src/app/views/services/category.service';
 import { jwtDecode } from "jwt-decode";
 import { PayloadUser } from 'src/app/interfaces/payload-user';
 
@@ -24,10 +24,15 @@ import { PayloadUser } from 'src/app/interfaces/payload-user';
 })
 export class CreateCategoryComponent {
 
+  @Input({ required: true }) categoryCreatedSignal!: WritableSignal<boolean>;
+
+
   fb = inject(FormBuilder);
   readonly loaderService = inject(ActivateLoaderService);
   private readonly toastr = inject(ToastrService);
-  private readonly createCategoryService = inject(CreateCategoryService);
+  private readonly createCategoryService = inject(CategoryService);
+  private createCategorySub?: Subscription;
+
 
   @ViewChild('createCategory') createCategory!: ElementRef<HTMLElement>;
 
@@ -38,20 +43,21 @@ export class CreateCategoryComponent {
     id_business: ['']
   });
 
-  onSubmitCreateCategory() : Subscription {
+  onSubmitCreateCategory() : void {
     this.loaderService.activateInternalSignal();
 
     const { id_business } = jwtDecode<PayloadUser>(localStorage.getItem('auth_token')!);
     this.form.get('id_business')?.setValue(id_business);
 
-    return this.createCategoryService.createCategory(this.form).subscribe({
+    this.createCategorySub = this.createCategoryService.createCategory(this.form).subscribe({
        next: (res: CategoryCreatedResponse) => {
-         console.log(res);
+
        },
        complete: () => {
          this.createCategory.nativeElement.classList.add('hidden');
          this.loaderService.deactivateInternalSignal();
          this.toastr.success('Categoría creada exitosamente');
+         this.categoryCreatedSignal.set(true);
          this.form.reset();
        },
        error: (err:any ) => {
@@ -64,8 +70,7 @@ export class CreateCategoryComponent {
   }
 
   ngOnDestroy(): void {
-    this.onSubmitCreateCategory().unsubscribe();
-    console.log('entro');
+    this.createCategorySub?.unsubscribe();
   }
 
 }

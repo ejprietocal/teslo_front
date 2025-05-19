@@ -51,6 +51,8 @@ export default class LoginComponent implements OnInit {
   loginService = inject(LoginService);
   router = inject(Router);
   toastr = inject(ToastrService);
+  loginSuscription? : Subscription;
+
 
   constructor(
     public readonly darkModeService : DarkModeService,
@@ -63,7 +65,7 @@ export default class LoginComponent implements OnInit {
 
 
   ngOnDestroy(): void {
-    this.onSubmitLogin().unsubscribe();
+    this.loginSuscription?.unsubscribe();
   }
 
   form: FormGroup = this.fb.group({
@@ -72,9 +74,9 @@ export default class LoginComponent implements OnInit {
     recaptchaToken: ['']
   });
 
-  onSubmitLogin(): Subscription {
+  onSubmitLogin(): void {
     this.activateLoader.activateSignal();
-    return this.recaptchaService.execute('submitLogin').subscribe((token) => {
+    this.loginSuscription = this.recaptchaService.execute('submitLogin').subscribe((token) => {
       this.form.get('recaptchaToken')?.setValue(token);
       this.loginService.login(this.form).subscribe({
         next: (res) => {

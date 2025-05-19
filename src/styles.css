@@ -64,7 +64,9 @@
   dark:bg-slate-900/50
   dark:text-stone-200;
 }
-
+.datatable-table thead th, .datatable-table tbody td{
+  @apply text-center;
+}
 .scrollbar-class{
   @apply
   scrollbar-thin scrollbar-thumb-gray-400 scrollbar-thumb-rounded-full scrollbar-track-transparent scrollbar-track-rounded-full overflow-auto
@@ -260,6 +262,32 @@ bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-bl
   border-2
   border-green-700
   dark:border-green-500
+  rounded-md
+  pl-5
+  pr-5
+  pt-2
+  pb-2
+  hover:cursor-pointer
+}
+.button-edit{
+  @apply
+  flex
+  justify-center
+  items-center
+
+  hover:bg-blue-500
+  hover:text-stone-100
+  dark:hover:bg-blue-700
+  dark:hover:text-white
+  text-blue-700
+  dark:text-blue-500
+  text-sm
+  font-extrabold
+  hover:duration-200
+  gap-3
+  border-2
+  border-blue-700
+  dark:border-blue-500
   rounded-md
   pl-5
   pr-5
