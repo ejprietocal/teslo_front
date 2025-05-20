@@ -1,0 +1,1 @@
+import{Eb as s,Ua as e,mb as t,nb as p}from"./chunk-ZMWEMAWI.js";var i=class o{static \u0275fac=function(n){return new(n||o)};static \u0275cmp=e({type:o,selectors:[["app-not-found"]],decls:2,vars:0,template:function(n,m){n&1&&(t(0,"p"),s(1,"not-found works!"),p())},encapsulation:2})};export{i as NotFoundComponent};

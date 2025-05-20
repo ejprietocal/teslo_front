@@ -1,1 +1,0 @@
-import{Db as p,Ta as n,lb as s,mb as a}from"./chunk-H2LR7ZRP.js";var o=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=n({type:t,selectors:[["app-warehouse"]],decls:2,vars:0,template:function(e,i){e&1&&(s(0,"p"),p(1,"warehouse works!"),a())},encapsulation:2})};export{o as default};
