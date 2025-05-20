@@ -20,4 +20,8 @@ export class CategoryService {
   getCategories() : Observable<Category[]> {
     return this.http.get<Category[]>(this.environments.URL_GET_CATEGORIES);
   }
+
+  deleteCategory(id: number): Observable<Category> {
+    return this.http.delete<Category>(`${this.environments.URL_DELETE_CATEGORY}/${id}`);
+  }
 }

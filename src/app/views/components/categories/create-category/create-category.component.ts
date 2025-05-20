@@ -58,6 +58,7 @@ export class CreateCategoryComponent {
          this.loaderService.deactivateInternalSignal();
          this.toastr.success('Categoría creada exitosamente');
          this.categoryCreatedSignal.set(true);
+         this.createCategorySub?.unsubscribe();
          this.form.reset();
        },
        error: (err:any ) => {
@@ -69,8 +70,6 @@ export class CreateCategoryComponent {
     });
   }
 
-  ngOnDestroy(): void {
-    this.createCategorySub?.unsubscribe();
-  }
+
 
 }
