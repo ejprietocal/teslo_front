@@ -3,4 +3,6 @@ export interface Category {
   name: string;
   description: string;
   isActive: boolean;
+  created_at?: string;
+  updated_at?: string;
 }
