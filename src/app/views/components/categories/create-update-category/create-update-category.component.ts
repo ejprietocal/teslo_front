@@ -10,7 +10,6 @@ import { CategoryService } from 'src/app/views/services/category.service';
 import { jwtDecode } from "jwt-decode";
 import { PayloadUser } from 'src/app/interfaces/payload-user';
 import { Category } from 'src/app/interfaces/category';
-import { s } from 'node_modules/@angular/core/weak_ref.d-ttyj86RV';
 
 
 @Component({
@@ -21,10 +20,10 @@ import { s } from 'node_modules/@angular/core/weak_ref.d-ttyj86RV';
     FormsModule,
     ReactiveFormsModule,
   ],
-  templateUrl: './create-category.component.html',
-  styleUrl: './create-category.component.css'
+  templateUrl: './create-update-category.component.html',
+  styleUrl: './create-update-category.component.css'
 })
-export class CreateCategoryComponent {
+export class CreateUpdateCategoryComponent {
 
   @Input({ required: true }) categoryCreatedSignal!: WritableSignal<boolean>;
   @Input({ required: true}) categories: Category[] = [];
@@ -43,7 +42,7 @@ export class CreateCategoryComponent {
 
   constructor(){
     effect(() => {
-      if (this.categoryId()) {
+      if (this.categoryId() && this.mode() === 'modify') {
         this.createCategoryService.getCategory(this.categoryId()).subscribe({
           next: (res) => {
             this.form.get('description')?.setValue(res.description);

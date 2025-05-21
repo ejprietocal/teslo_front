@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ElementRef, inject, ViewChild, effect, signal, Signal } from '@angular/core';
-import { CreateCategoryComponent } from './create-category/create-category.component';
+import { AfterViewInit, Component, ElementRef, inject, ViewChild, effect, signal, Signal, WritableSignal, Input } from '@angular/core';
+import { CreateUpdateCategoryComponent } from './create-update-category/create-update-category.component';
 import { ActivateLoaderService } from 'src/app/services/activate-loader.service';
 import { CategoryService } from '../../services/category.service';
 import { DataTable } from 'simple-datatables'
@@ -8,11 +8,13 @@ import { dataCategory } from 'src/app/interfaces/data-datatable';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Category } from 'src/app/interfaces/category';
+import { DeleteCategoryComponent } from './delete-category/delete-category.component';
 
 @Component({
   selector: 'app-categories',
   imports: [
-    CreateCategoryComponent,
+    CreateUpdateCategoryComponent,
+    DeleteCategoryComponent,
     CommonModule
   ],
   templateUrl: './categories.component.html',
@@ -30,6 +32,7 @@ export default class CategoriesComponent implements AfterViewInit {
   private readonly toastr = inject(ToastrService);
   public categoryCreated = signal(false);
   public resetForm = signal(false);
+  public actionDeleteCategory = signal(false);
   public categoryId = signal<number>(0);
   public mode = signal<string>('');
   public dataTableInstance?: DataTable;
@@ -39,6 +42,10 @@ export default class CategoriesComponent implements AfterViewInit {
       if (this.categoryCreated()) {
         this.fetchCategories();
         this.categoryCreated.set(false);
+      }
+      if (this.actionDeleteCategory()) {
+        this.deleteCategory();
+        this.actionDeleteCategory.set(false);
       }
     });
   }
@@ -145,6 +152,7 @@ export default class CategoriesComponent implements AfterViewInit {
     });
   }
   deleteCategory(): void {
+    console.log('deleteCategory');
     this.loaderService.activateInternalSignal();
     this.categoryDeletedSuscription = this.categoryService.deleteCategory(this.categoryId()).subscribe({
       next: (res) => {
