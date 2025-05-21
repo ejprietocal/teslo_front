@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { dataCategory } from 'src/app/interfaces/data-datatable';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { Category } from 'src/app/interfaces/category';
 
 @Component({
   selector: 'app-categories',
@@ -19,31 +20,27 @@ import { ToastrService } from 'ngx-toastr';
 })
 export default class CategoriesComponent implements AfterViewInit {
 
+  @ViewChild('categoryWrapper') category!: ElementRef;
+  categories : (string | boolean | number )[][] = [];
+  public categoriesSend : Category[] = [];
+  private categoryDeletedSuscription?: Subscription;
+  private categorySuscription?: Subscription;
+  private readonly categoryService = inject(CategoryService);
+  private readonly loaderService = inject(ActivateLoaderService);
+  private readonly toastr = inject(ToastrService);
+  public categoryCreated = signal(false);
+  public resetForm = signal(false);
+  public categoryId = signal<number>(0);
+  public mode = signal<string>('');
+  public dataTableInstance?: DataTable;
+
   constructor(){
     effect(() => {
       if (this.categoryCreated()) {
         this.fetchCategories();
-        this.categoryCreated.set(false); // resetear señal
+        this.categoryCreated.set(false);
       }
     });
-  }
-
-
-  @ViewChild('categoryWrapper') category!: ElementRef;
-  categories : (string | boolean | number )[][] = [];
-
-  private readonly loaderService = inject(ActivateLoaderService);
-  private readonly toastr = inject(ToastrService);
-  private readonly categoryService = inject(CategoryService);
-  public dataTableInstance?: DataTable;
-  private categorySuscription?: Subscription;
-  private categoryDeletedSuscription?: Subscription;
-  public categoryCreated = signal(false);
-  public categoryId = signal<number>(NaN);
-
-  customDataTableOptions = {
-    searchable: true,
-    paging: true,
   }
 
   datos : dataCategory = {
@@ -63,10 +60,10 @@ export default class CategoriesComponent implements AfterViewInit {
         this.categories = res.map(c => [
           c.name,
           c.description,
-          c.isActive ? '<div class="text-center w-full"><span class="fa fa-check text-green-500"></span> Activo</div>' : '<div class="text-center w-full"><span class="fa fa-times text-red-500"></span> Inactivo</div>',
+          c.isActive,
           c.id,
         ]);
-
+        this.categoriesSend = res;
         this.datos.data = this.categories;
 
         if (this.dataTableInstance) {
@@ -91,7 +88,7 @@ export default class CategoriesComponent implements AfterViewInit {
               render : function(value, type, row, meta) {
                 return `
                   <div class="flex justify-center items-center gap-5 w-full">
-                  <button type="button" data-id="${value}" data-action="edit" class="button-edit"><span class="fa-solid fa-pen-to-square"></span> Modificar</button>
+                  <button type="button" data-id="${value}" data-action="edit" class="button-edit" data-modal-target="createCategory" data-modal-toggle="createCategory"><span class="fa-solid fa-pen-to-square"></span> Modificar</button>
                     <button type="button" data-id="${value}"  data-action="delete" class="button-cancel" data-modal-target="delete-modal" data-modal-toggle="delete-modal"><span class="fa-solid fa-trash"></span> Eliminar</button>
                 `;
               }
@@ -125,14 +122,20 @@ export default class CategoriesComponent implements AfterViewInit {
       },
       complete: () => {
         this.loaderService.deactivateInternalSignal();
+        this.categorySuscription?.unsubscribe();
         const table = this.category.nativeElement as HTMLElement;
 
           table.querySelectorAll('[data-action]').forEach(btn => {
             btn.addEventListener('click', (event) => {
               const target = event.currentTarget as HTMLElement;
-              const id = Number(target.getAttribute('data-id'));
-              // const action = target.getAttribute('data-action');
-              this.categoryId.set(id);
+              // const id = parseInt(target.getAttribute('data-id')!);
+              const dataAction = target.getAttribute('data-action');
+              this.mode.set(dataAction === 'edit' ? 'modify' : 'create');
+              this.categoryId.set(+target.getAttribute('data-id')!);
+
+              if (dataAction === 'create') {
+                this.resetForm.set(true);
+              }
             });
           });
       },
@@ -141,8 +144,6 @@ export default class CategoriesComponent implements AfterViewInit {
       }
     });
   }
-
-
   deleteCategory(): void {
     this.loaderService.activateInternalSignal();
     this.categoryDeletedSuscription = this.categoryService.deleteCategory(this.categoryId()).subscribe({
@@ -165,9 +166,5 @@ export default class CategoriesComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.fetchCategories();
-  }
-
-  ngOnDestroy(): void {
-      this.categorySuscription?.unsubscribe();
   }
 }
