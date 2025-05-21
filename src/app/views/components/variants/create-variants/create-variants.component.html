@@ -1,10 +1,12 @@
 <div #createVariante id="createVariante" tabindex="-1" class="absolute hidden flex top-0 left-0 backdrop-blur-xs w-full items-start pt-15 h-full z-10">
   <div class="w-sm md:w-md lg:w-lg h-fit bg-color rounded-xl p-5 relative animate-fadeIn">
     <span class="fa-solid fa-close absolute right-3 top-3 cursor-pointer text-xl" data-modal-hide="createVariante" aria-hidden="true"></span>
-    <h4 class="h4 mb-2"><span class="fa fa-plus"></span> Nueva Variante</h4>
+    <div class="flex justify-center">
+      <h4 class="h4 mb-2 "><span class="fa fa-home"></span>  Crear Nueva Variante</h4>
+    </div>
     <hr>
-    <form [formGroup]="form"  class="mt-5">
-      <div class="mb-8 relative">
+    <form [formGroup]="form" (ngSubmit)="createVariants()" class="mt-5">
+      <div class="mb-3 relative">
         <label for="name" class="label-behavior">Nombre</label>
         <input
           type="text"
@@ -22,24 +24,25 @@
           <p class="text-red-500 text-sm absolute">El nombre debe tener al menos 3 caracteres</p>
         }
       </div>
-      <div class="mb-10 relative">
+      <div>
         <label for="description" class="label-behavior">Descripción</label>
-        <textarea
-          id="description"
+        <textarea name="description" id="description"
           class="input-behavior"
           formControlName="description"
-          rows="5"
-          placeholder="Escribe la descripción de la categoría"
+          placeholder="Escribe una descripcion"
           [ngClass]="{'border-red-500!': form.get('description')?.hasError('required') && form.get('description')?.touched}"
-        ></textarea>
+          >
+        </textarea>
         @if(form.get('description')?.hasError('required') && form.get('description')?.touched){
-          <p class="text-red-500 text-sm  absolute">Este campo es requerido</p>
+          <p class="text-red-500 text-sm absolute">Este campo es requerido</p>
         }
         @if(form.get('description')?.hasError('minlength')){
-          <p class="text-red-500 text-sm absolute">La descripción debe tener al menos 3 caracteres</p>
+          <p class="text-red-500 text-sm absolute">El nombre debe tener al menos 3 caracteres</p>
         }
       </div>
-      <div class="mb-3 flex justify-center">
+
+
+      <div class="mb-3 mt-8 flex justify-center">
         <button type="submit" class="button-create" [disabled]="form.invalid"><span class="fa fa-check"></span> Crear Variante</button>
       </div>
     </form>

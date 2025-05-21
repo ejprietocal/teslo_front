@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, Input, ViewChild, WritableSignal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { jwtDecode } from 'jwt-decode';
@@ -20,44 +20,52 @@ import { CreateVariantsService } from 'src/app/views/services/create-variants.se
   styleUrl: './create-variants.component.css'
 })
 export class CreateVariantsComponent {
+ private createVariantSubscription!:Subscription
  fb = inject(FormBuilder);
   readonly loaderService = inject(ActivateLoaderService);
   private readonly toastr = inject(ToastrService);
   private readonly createVarianteService = inject(CreateVariantsService);
-
+  // @Input({ required: true }) variantsCreatedSignal!: WritableSignal<boolean>;
   @ViewChild('createVariante') createVariante!: ElementRef<HTMLElement>;
 
 
   form: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
-    description: ['', [Validators.required, Validators.minLength(3)]],
+    description: ['', [Validators.required,Validators.minLength(3)]],
     id_business: ['']
   });
 
-  createVariants() : Subscription{
+  createVariants() {
       this.loaderService.activateInternalSignal();
 
       const { id_business } = jwtDecode<PayloadUser>(localStorage.getItem('auth_token')!);
       this.form.get('id_business')?.setValue(id_business);
 
-      return this.createVarianteService.createNewVariante(this.form).subscribe({
+
+      this.createVariantSubscription =  this.createVarianteService.createNewVariante(this.form).subscribe({
          next: (res: VarianteResponse) => {
            console.log(res);
          },
-
+         complete: () => {
+          this.createVariante.nativeElement.classList.add('hidden');
+          this.loaderService.deactivateInternalSignal();
+          this.toastr.success('Categoría creada exitosamente');
+          // this.variantsCreatedSignal.set(true);
+          this.form.reset();
+        },
          error: (err:any ) => {
-           console.error('Error en la creación de categoría:', err);
+           console.error('Error en la creación de la variante:', err);
            this.loaderService.deactivateInternalSignal();
            this.toastr.error(err.error.message);
            this.form.reset();
          }
       });
-    }
+  }
 
-    ngOnDestroy(): void {
-      this.createVariants().unsubscribe();
-      console.log('entro');
-    }
+  ngOnDestroy(): void {
+    this.createVariantSubscription.unsubscribe()
+
+  }
 
 
 
