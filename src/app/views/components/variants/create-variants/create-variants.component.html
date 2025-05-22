@@ -2,7 +2,7 @@
   <div class="w-sm md:w-md lg:w-lg h-fit bg-color rounded-xl p-5 relative animate-fadeIn">
     <span class="fa-solid fa-close absolute right-3 top-3 cursor-pointer text-xl" data-modal-hide="createVariante" aria-hidden="true"></span>
     <div class="flex justify-center">
-      <h4 class="h4 mb-2 "><span class="fa fa-home"></span>  Crear Nueva Variante</h4>
+      <h4 class="h4 mb-2 "><span class="fa fa-home"></span> {{this.mode() === 'create' ? this.textModalCreate.title : this.textModalmodify.title}}</h4>
     </div>
     <hr>
     <form [formGroup]="form" (ngSubmit)="createVariants()" class="mt-5">
@@ -43,7 +43,7 @@
 
 
       <div class="mb-3 mt-8 flex justify-center">
-        <button type="submit" class="button-create" [disabled]="form.invalid"><span class="fa fa-check"></span> Crear Variante</button>
+        <button type="submit" class="button-create" [disabled]="form.invalid"><span class="fa fa-check"></span> {{this.mode() === 'create' ? this.textModalCreate.button : this.textModalmodify.button}} Variante</button>
       </div>
     </form>
   </div>
