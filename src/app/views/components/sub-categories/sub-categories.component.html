@@ -1,11 +1,10 @@
-<button class="button-internal-module">
+<button class="button-internal-module" (click)="this.mode.set('create')"  data-modal-target="createUpdateSubcategory" data-modal-toggle="createUpdateSubcategory">
   <span class="fa-solid fa-plus"></span>
   <span class="ml-2">Nueva subcategoría</span>
 </button>
 
 
-<app-create-update-sub-category />
-
+<app-create-update-sub-category [mode]="mode" [categories]="categories"></app-create-update-sub-category>
 <div #subCategoryWrapper>
   <table #subCategory>
   </table>

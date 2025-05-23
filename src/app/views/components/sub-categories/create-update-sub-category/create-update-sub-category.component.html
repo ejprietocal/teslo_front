@@ -1,1 +1,89 @@
-<p>create-update-sub-category works!</p>
+<div id="createUpdateSubcategory" class="absolute hidden justify-center items-center top-0 left-0 backdrop-blur-xs w-full  h-full z-10">
+  <div class="w-sm md:w-md lg:w-lg h-fit bg-color rounded-xl p-5 relative animate-fadeIn">
+    <button type="button" class="absolute cursor-pointer top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="createUpdateSubcategory" aria-hidden="true">
+      <span type="button" class="fa-solid fa-close cursor-pointer text-xl"></span>
+      <span class="sr-only">Close modal</span>
+    </button>
+
+    <h4 class="h4 mb-2"><span class="fa fa-plus"></span> {{this.mode() === 'create' ? this.textModalCreate.title : this.textModalmodify.title}}</h4>
+
+    <form  [formGroup]="form" class="mt-5">
+      <div class="mb-8 relative grid grid-cols-3 gap-2">
+        <div class="col-span-2">
+          <label for="name" class="label-behavior">Nombre</label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            class="input-behavior"
+            placeholder="Escribe el nombre de la subcategoría"
+            [ngClass]="{'border-red-500!': form.get('name')?.hasError('required') && form.get('name')?.touched}"
+
+          >
+          @if(form.get('name')?.hasError('required') && form.get('name')?.touched){
+            <p class="text-red-500 text-sm absolute">Este campo es requerido</p>
+          }
+          @if(form.get('name')?.hasError('minlength')){
+            <p class="text-red-500 text-sm absolute">El nombre debe tener al menos 3 caracteres</p>
+          }
+        </div>
+        <div>
+          <label for="estado" class="label-behavior">Estado</label>
+          <select id="estado" type="text" class="input-behavior" formControlName="isActive">
+            <option [ngValue]="true" [selected]="true"><span class="fa fa-check"></span> Activo</option>
+            <option [ngValue]="false"><span class="fa fa-close"></span> Inactivo</option>
+          </select>
+        </div>
+      </div>
+      <div class="mb-8 relative grid grid-cols-4 gap-2">
+        <div class="col-span-2">
+          <label for="slug" class="label-behavior">Slug</label>
+          <input
+            type="text"
+            id="slug"
+            formControlName="slug"
+            class="input-behavior"
+            placeholder="Escribe el slug de la subcategoría"
+            [ngClass]="{'border-red-500!': form.get('slug')?.hasError('required') && form.get('slug')?.touched}"
+
+          >
+          @if(form.get('slug')?.hasError('required') && form.get('slug')?.touched){
+            <p class="text-red-500 text-sm absolute">Este campo es requerido</p>
+          }
+          @if(form.get('slug')?.hasError('minlength')){
+            <p class="text-red-500 text-sm absolute">El slug debe tener al menos 3 caracteres</p>
+          }
+        </div>
+        <div class="col-span-2">
+          <label for="category_product_id" class="label-behavior">Producto</label>
+          <select id="category_product_id" type="text" class="input-behavior" formControlName="category_product_id">
+            <option [ngValue]="0"><span class="fa fa-close"></span> Seleccione un producto</option>
+            <option *ngFor="let category of categories" [ngValue]="category.id"><span class="fa fa-check"></span> {{category.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="mb-10 relative">
+        <label for="description" class="label-behavior">Descripción</label>
+        <textarea
+          id="description"
+          class="input-behavior"
+          formControlName="description"
+          rows="5"
+          placeholder="Escribe la descripción de la subcategoría"
+          [ngClass]="{'border-red-500!': form.get('description')?.hasError('required') && form.get('description')?.touched}"
+        ></textarea>
+        @if(form.get('description')?.hasError('required') && form.get('description')?.touched){
+          <p class="text-red-500 text-sm  absolute">Este campo es requerido</p>
+        }
+        @if(form.get('description')?.hasError('minlength')){
+          <p class="text-red-500 text-sm absolute">La descripción debe tener al menos 3 caracteres</p>
+        }
+      </div>
+      <div class="mb-3 flex justify-between">
+        <button type="button" class="button-cancel" data-modal-hide="createUpdateSubcategory"><span class="fa fa-ban"></span> Cancelar</button>
+        <button type="submit" class="button-create" [disabled]="form.invalid"><span class="fa fa-check"></span> {{this.mode() === 'create' ? this.textModalCreate.button : this.textModalmodify.button}}</button>
+      </div>
+    </form>
+
+  </div>
+</div>
