@@ -2,7 +2,11 @@
   <app-right-menu class="z-50"/>
   <div class="w-full">
     <app-top-menu></app-top-menu>
-    <div class="p-4">
+    <div class="p-5 relative h-[calc(100vh-3rem)] overflow-y-auto">
+      <app-internal-loader  *ngIf="loaderService.loaderInternal()"></app-internal-loader>
+    <div class="mb-2">
+        <app-bread-cumb></app-bread-cumb>
+      </div>
       <router-outlet></router-outlet>
     </div>
   </div>

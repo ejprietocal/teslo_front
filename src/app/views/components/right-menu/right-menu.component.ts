@@ -14,7 +14,8 @@ import { MenuItem } from 'src/app/interfaces/menu-item';
     CommonModule,
     FontAwesomeModule,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+
   ],
   templateUrl: './right-menu.component.html',
   styleUrl: './right-menu.component.css'
@@ -23,39 +24,43 @@ export class RightMenuComponent {
 
   readonly drawerService = inject(ToggleMenuService);
   readonly router = inject(Router);
-  submenuOpen = signal<Record<number, boolean>>({});
 
-  toggleSubmenu(index: number): void {
-    const current = this.submenuOpen();
-    this.submenuOpen.set({
-      ...current,
-      [index]: !current[index],
-    });
-  }
 
   menuItems : MenuItem[] = [
     {
       name: 'Inventario',
-      link: 'dashboard',
       icon: 'fa-solid fa-warehouse',
       subMenus: [
         {
           name: 'productos',
-          link: 'products'
+          link: 'products',
+          subMenus: [
+            {
+              name : 'items',
+              icon: 'fa-solid fa-right-long',
+              link: 'products/items'
+            },
+            {
+              name: 'variantes',
+              icon: 'fa-solid fa-right-long',
+              link: 'products/variantes'
+            },
+            {
+              name: 'categorías',
+              icon: 'fa-solid fa-right-long',
+              link: 'products/categories'
+            },
+            {
+              name: 'subcategorías',
+              icon: 'fa-solid fa-right-long',
+              link: 'products/sub-categories'
+            }
+          ]
         },
-        {
-          name: 'wareouse',
-          link: 'warehouse'
-        },
-        {
-          name: 'Suministros',
-          link: 'supplies'
-        }
       ]
     },
     {
       name: 'Gestión de cuenta',
-      link: 'dashboard',
       icon: 'fa-solid fa-user',
       subMenus: [
         {

@@ -18,8 +18,27 @@ export const routes: Routes = [
       },
       {
         path: 'products',
-        loadComponent: () => import('./views/components/products/products.component')
+        loadComponent: () => import('./views/components/products/products.component'),
+        children: [
+          {
+            path: 'items',
+            loadComponent: () => import('./views/components/items/items.component')
+          },
+          {
+            path: 'variantes',
+            loadComponent: () => import('./views/components/variants/variants.component')
+          },
+          {
+            path: 'categories',
+            loadComponent: () => import('./views/components/categories/categories.component')
+          },
+          {
+            path: 'sub-categories',
+            loadComponent: () => import('./views/components/sub-categories/sub-categories.component')
+          },
+        ]
       },
+
       {
         path: 'supplies',
         loadComponent: () => import('./views/components/supplies/supplies.component')

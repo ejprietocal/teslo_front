@@ -19,7 +19,6 @@ jobs:
       - name: ⚙️ Crear archivo de entorno
         run: node scripts/set-envs.js
         env:
-          NODE_ENV: production
           URL_LOGIN_LOCAL: ${{ secrets.URL_LOGIN_LOCAL }}
           URL_LOGIN: ${{ secrets.URL_LOGIN }}
           URL_REGISTER: ${{ secrets.URL_REGISTER }}
@@ -28,6 +27,12 @@ jobs:
           CLAVE_SITIO_WEB_RECAPTCHA: ${{ secrets.CLAVE_SITIO_WEB_RECAPTCHA }}
           URL_RETRIEVE_ACCOUNT: ${{ secrets.URL_RETRIEVE_ACCOUNT }}
           URL_RESET_PASSWORD: ${{ secrets.URL_RESET_PASSWORD }}
+          URL_LOGIN_BUSINESS: ${{ secrets.URL_LOGIN_BUSINESS }}
+          URL_CREATE_CATEGORY: ${{ secrets.URL_CREATE_CATEGORY }}
+          URL_GET_CATEGORIES: ${{ secrets.URL_GET_CATEGORIES }}
+          URL_GET_CATEGORY: ${{ secrets.URL_GET_CATEGORY }}
+          URL_DELETE_CATEGORY: ${{ secrets.URL_DELETE_CATEGORY }}
+          URL_UPDATE_CATEGORY: ${{ secrets.URL_UPDATE_CATEGORY }}
 
       - name: 🏗️ Construir el proyecto
         run: npm run build -- --base-href "/"

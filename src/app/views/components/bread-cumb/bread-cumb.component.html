@@ -1,0 +1,22 @@
+<nav class="flex" aria-label="Breadcrumb">
+  <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+    @for (item of breadcrumb; track $index) {
+      <li class="inline-flex items-center">
+        @if ($index === 0) {
+          <div class="bg-module-breadcrumb-item">
+            <span class="fa-solid fa-house-chimney-crack fa-fw mr-1"></span>
+            <a [routerLink]="item.url">
+              {{item.label | titlecase}}
+            </a>
+          </div>
+        }
+        @else {
+          <span class="fa-solid fa-chevron-right mx-2"></span>
+          <a [routerLink]="item.url" class="bg-module-breadcrumb-item">
+            {{item.label | titlecase}}
+          </a>
+        }
+      </li>
+    }
+  </ol>
+</nav>

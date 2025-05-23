@@ -1,0 +1,16 @@
+<button (click)="this.mode.set('create') ; this.resetForm.set(true)" type="button" data-modal-target="createCategory" data-modal-toggle="createCategory" class="button-internal-module">
+  <span class="fa-solid fa-plus"></span>
+  <span class="ml-2">Nueva categoría</span>
+</button>
+
+
+<app-create-category [categoryCreatedSignal]="categoryCreated" [mode]="mode" [categoryId]="categoryId" [categories]="categoriesSend" [resetForm]="resetForm"></app-create-category>
+
+
+<div #categoryWrapper>
+  <table #category>
+  </table>
+</div>
+
+
+<app-delete-category  [actionCreateCategor]="actionDeleteCategory"></app-delete-category>

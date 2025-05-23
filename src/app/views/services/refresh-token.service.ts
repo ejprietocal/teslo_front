@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { User } from '../../interfaces/user';
 import { Router } from '@angular/router';
 import { ActivateLoaderService } from '../../services/activate-loader.service';
@@ -30,18 +30,18 @@ export class RefreshTokenService {
         }
       }).subscribe({
         next: (res) => {
-          this.activateLoader.deactivateSignal();
           if (res.token) {
             this.datosUser.set(res);
             localStorage.setItem('auth_token', res.token);
-            // console.log(res.token);
-            // Evitar redirigir al dashboard si ya estás en alguna ruta dentro de dashboard
             if (this.router.url !== '/dashboard' && !this.router.url.startsWith('/dashboard')) {
               this.router.navigate(['/dashboard']);
             }
           } else {
             this.router.navigate(['/']);
           }
+        },
+        complete: () => {
+          this.activateLoader.deactivateSignal();
         },
         error: (err) => {
           console.error('Error en la solicitud de login:', err);
