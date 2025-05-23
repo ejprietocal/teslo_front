@@ -1,0 +1,17 @@
+<!-- Modal toggle -->
+<button (click)="this.mode.set('create') ; this.resetForm.set(true)" data-modal-target="createVariante" data-modal-toggle="createVariante" class="button-internal-module" type="button">
+  <span class="fa-solid fa-plus"></span>
+  <span class="ml-2">Nueva Variante</span>
+</button>
+
+
+<app-create-variants [variantsCreatedSignal]="variantsCreated" [mode]="mode" [variantsId]="variantsId" [variante]="variantSend" [resetForm]="resetForm"></app-create-variants>
+
+
+<div #variantWrapper>
+  <table #variant>
+  </table>
+</div>
+
+<app-eliminar-variante [actionCreateVariante]="actionDeleteVariante"></app-eliminar-variante>
+<app-popover></app-popover>
