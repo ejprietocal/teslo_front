@@ -1,1 +1,0 @@
-import{Eb as p,Ua as n,mb as s,nb as a}from"./chunk-ZMWEMAWI.js";var o=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=n({type:t,selectors:[["app-warehouse"]],decls:2,vars:0,template:function(e,i){e&1&&(s(0,"p"),p(1,"warehouse works!"),a())},encapsulation:2})};export{o as default};

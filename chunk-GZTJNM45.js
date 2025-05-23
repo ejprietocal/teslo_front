@@ -1,1 +1,0 @@
-import{Eb as r,Ua as n,mb as o,nb as p}from"./chunk-ZMWEMAWI.js";var t=class s{static \u0275fac=function(e){return new(e||s)};static \u0275cmp=n({type:s,selectors:[["app-users"]],decls:2,vars:0,template:function(e,i){e&1&&(o(0,"p"),r(1,"users works!"),p())},encapsulation:2})};export{t as default};

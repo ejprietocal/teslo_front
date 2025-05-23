@@ -1,0 +1,1 @@
+import{Eb as p,Ua as o,mb as c,nb as a}from"./chunk-SNWDAWOK.js";var t=class n{static \u0275fac=function(e){return new(e||n)};static \u0275cmp=o({type:n,selectors:[["app-account"]],decls:2,vars:0,template:function(e,i){e&1&&(c(0,"p"),p(1,"account works!"),a())},encapsulation:2})};export{t as default};
