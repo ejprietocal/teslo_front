@@ -10,4 +10,5 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './products.component.css'
 })
 export default class ProductsComponent {
+
 }

@@ -71,12 +71,13 @@
             <p class="text-red-500 text-xs">Este campo es requerido</p>
           }
           <div class="card flex justify-center mb-3">
-            <p-select
-
-              optionLabel="name"
-              formControlName="tipo_negocio"
-              placeholder="Selecciona el Tipo de Negocio"
-              class="input-behavior " height="40px;" />
+            <select formControlName="tipo_negocio"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <option value="" disabled selected>Selecciona el tipo de negocio</option>
+              <option *ngFor="let tipo_negocio of tipo_negocio" [value]="tipo_negocio.id">
+                {{ tipo_negocio.name }}
+              </option>
+            </select>
           </div>
 
         <div class="relative">
@@ -108,11 +109,12 @@
           }
 
           <div class="card flex justify-left">
-            <p-checkbox
-            formControlName="checked"
-            inputId="checkbox1">
-          </p-checkbox>
-          <label for="checkbox1" class="ml-2">Acepto términos y tratamientos de datos</label>
+            <input id="checked" type="checkbox" formControlName="checked"
+            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+          <label for="checked" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+            Acepto los términos y condiciones
+          </label>
+
         </div>
         </fieldset>
         <p class=" mb-4">Ya tienes una cuenta? <span class="cursor-pointer" (click)="irLogin()"><strong>Iniciar sesión</strong></span></p>
