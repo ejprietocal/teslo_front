@@ -23,6 +23,9 @@ function generateEnvFile(env, outputPath) {
     'URL_DELETE_CATEGORY',
     'URL_UPDATE_CATEGORY',
 
+    //Variants Endpoints
+    'URL_CREATE_VARIANTE',
+    'URL_GET_VARIANTE',
     // add new varable here
   ];
 
@@ -50,6 +53,10 @@ export const environment = {
   URL_GET_CATEGORY: '${env.URL_GET_CATEGORY}',
   URL_DELETE_CATEGORY: '${env.URL_DELETE_CATEGORY}',
   URL_UPDATE_CATEGORY: '${env.URL_UPDATE_CATEGORY}',
+
+  //Variants Endpoints
+  URL_CREATE_VARIANTE: '${env.URL_CREATE_VARIANTE}',
+  URL_GET_VARIANTE: '${env.URL_GET_VARIANTE}',
 
   // add new varable here
 };

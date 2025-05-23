@@ -33,6 +33,8 @@ jobs:
           URL_GET_CATEGORY: ${{ secrets.URL_GET_CATEGORY }}
           URL_DELETE_CATEGORY: ${{ secrets.URL_DELETE_CATEGORY }}
           URL_UPDATE_CATEGORY: ${{ secrets.URL_UPDATE_CATEGORY }}
+          URL_CREATE_VARIANTE: ${{secrets.URL_CREATE_VARIANTE}}
+          URL_GET_VARIANTE : ${{secrets.URL_GET_VARIANTE}}
 
       - name: 🏗️ Construir el proyecto
         run: npm run build -- --base-href "/"
