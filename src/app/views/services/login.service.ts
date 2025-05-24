@@ -18,7 +18,6 @@ export class LoginService {
   }
 
   loginWithBusiness(payload: PayloadUser, token: string)  {
-    console.log(payload, token)
     return this.http.post<any>(this.environments.URL_LOGIN_BUSINESS, payload, {
        headers: {
           'Authorization': `Bearer ${token}`
