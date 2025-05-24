@@ -86,6 +86,7 @@ export default class LoginComponent implements OnInit {
             this.activateLoader.deactivateSignal();
           } else {
             const payload = { email : decoded.email, id_business: Array.isArray(decoded.id_business)? decoded.id_business[0] : decoded.id_business };
+            console.log(decoded, payload)
             this.loginService.loginWithBusiness(payload, res.token!).subscribe({
               next: (res) => {
                 localStorage.setItem('auth_token', res.token!);
